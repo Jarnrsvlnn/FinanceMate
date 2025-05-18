@@ -599,3 +599,693 @@ main section.right-section .recent-transactions .history:hover {
 .history:hover {
     box-shadow: none;
 }
+
+/*============================== MEDIA QUERIES : SMALLER DESKTOPS ==============================*/
+@media screen and (max-width: 1850px) {
+    main .middle-section .income-input .content .source input {
+        width: 120%;
+    }
+    main .middle-section .income-input .content .amount input {
+        width: 130%;
+    }
+}
+
+@media screen and (max-width: 1670px) {
+    main .middle-section .income-input .content .source input {
+        width: 100%;
+    }
+    main .middle-section .income-input .content .source h2 {
+        font-size: 1.3rem;
+        width: 100%;
+    }
+    main .middle-section .income-input .content .amount input {
+        width: 110%;
+    }
+    main .middle-section .income-input .content .amount h2 {
+        font-size: 1.3rem;
+        width: 100%;
+        margin-left: 15rem;
+    }
+    main .middle-section .title h1 {
+        margin-left: 0.1rem;
+        width: 200%;
+    }
+    main .middle-section .income-input .header h2 {
+        font-size: 2.5rem;
+        width: 200%;
+    }
+}
+
+@media screen and (max-width: 1670px) {
+    main .middle-section .income-input .content .source input {
+        width: 100%;
+    }
+    main .middle-section .income-input .content .source h2 {
+        font-size: 1.1rem;
+        width: 100%;
+        margin-left: 3rem;
+    }
+    main .middle-section .income-input .content .amount input {
+        width: 100%;
+    }
+    main .middle-section .income-input .content .amount h2 {
+        font-size: 1.2rem;
+        width: 100%;
+        margin-left: 13rem;
+    }
+    main .middle-section .title h1 {
+        margin-left: 0.1rem;
+        width: 200%;
+    }
+    main .middle-section .income-input .header h2 {
+        font-size: 2rem;
+        width: 200%;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+
+    main .middle-section .income-input {
+        width: 140%;
+        margin-left: 33rem;
+    }
+
+    main .middle-section .title h1 {
+        position: relative;
+        width: 140%;
+        font-size: 4rem;
+        left: 9rem;
+    }
+
+    main .middle-section .income-input .content .source input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .source h2 {
+        font-size: 1.1rem;
+        width: 100%;
+        margin-left: 3rem;
+    }
+    main .middle-section .income-input .content .amount input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .amount h2 {
+        font-size: 1.2rem;
+        width: 100%;
+        margin-left: 13rem;
+    }
+    main .middle-section .title h1 {
+        margin-left: 0.1rem;
+        width: 200%;
+    }
+    main .middle-section .income-input .header h2 {
+        font-size: 2rem;
+        width: 200%;
+    }
+
+    main .right-section .container {
+        margin-top: 73rem;
+        margin-right: 43rem;
+        width: 140%;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+
+    main .middle-section .income-input {
+        width: 140%;
+        margin-left: 25rem;
+    }
+
+    main .middle-section .title h1 {
+        position: relative;
+        width: 140%;
+        font-size: 4rem;
+        left: 2rem;
+    }
+
+    main .middle-section .income-input .content .source input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .source h2 {
+        font-size: 1.1rem;
+        width: 100%;
+        margin-left: 3rem;
+    }
+    main .middle-section .income-input .content .amount input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .amount h2 {
+        font-size: 1.2rem;
+        width: 100%;
+        margin-left: 13rem;
+    }
+    main .middle-section .title h1 {
+        margin-left: 0.1rem;
+        width: 200%;
+    }
+    main .middle-section .income-input .header h2 {
+        font-size: 2rem;
+        width: 200%;
+    }
+
+    main .right-section .container {
+        margin-top: 73rem;
+        margin-right: 41rem;
+        width: 120%;
+    }
+}
+/*============================== MEDIA QUERIES : TABLETS ==============================*/
+@media screen and (max-width: 1024px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+    main .middle-section .income-input {
+        width: 110%;
+        margin-left: 10rem;
+    }
+
+    main .middle-section .title h1 {
+        position: relative;
+        width: 140%;
+        font-size: 5rem;
+        left: 2rem;
+    }
+
+    main .middle-section .income-input .content .source input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .source h2 {
+        font-size: 1.1rem;
+        width: 100%;
+        margin-left: 3rem;
+    }
+    main .middle-section .income-input .content .amount input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .amount h2 {
+        font-size: 1.2rem;
+        width: 100%;
+        margin-left: 13rem;
+    }
+    main .middle-section .title h1 {
+        margin-left: 0.1rem;
+        width: 200%;
+    }
+    main .middle-section .income-input .header h2 {
+        font-size: 2rem;
+        width: 200%;
+    }
+
+    main .right-section .container {
+        margin-top: 1rem;
+        margin-left: 33rem;
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+    main .middle-section .income-input {
+        width: 100%;
+        margin-left: 5%;
+    }
+
+    main .middle-section .title h1 {
+        position: relative;
+        width: 140%;
+        font-size: 4rem;
+        left: 2rem;
+    }
+
+    main .middle-section .income-input .content .source input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .source h2 {
+        font-size: 1.1rem;
+        width: 100%;
+        margin-left: 3rem;
+    }
+    main .middle-section .income-input .content .amount input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .amount h2 {
+        font-size: 1.2rem;
+        width: 100%;
+        margin-left: 13rem;
+    }
+    main .middle-section .title h1 {
+        margin-left: 0.1rem;
+        width: 200%;
+    }
+    main .middle-section .income-input .header h2 {
+        font-size: 2rem;
+        width: 200%;
+    }
+
+    main .right-section .container {
+        margin-top: -1rem;
+        margin-left: 30rem;
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 810px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+    main .middle-section .income-input {
+        width: 90%;
+        margin-left: -1rem;
+    }
+
+    main .middle-section .title h1 {
+        position: relative;
+        width: 140%;
+        font-size: 3.7rem;
+        left: -1rem;
+    }
+
+    main .middle-section .income-input .content .source input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .source h2 {
+        font-size: 1.1rem;
+        width: 100%;
+        margin-left: 3rem;
+    }
+    main .middle-section .income-input .content .amount input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .amount h2 {
+        font-size: 1.2rem;
+        width: 100%;
+        margin-left: 13rem;
+    }
+    main .middle-section .title h1 {
+        margin-left: 0.1rem;
+        width: 200%;
+    }
+    main .middle-section .income-input .header h2 {
+        font-size: 2rem;
+        width: 200%;
+    }
+
+    main .right-section .container {
+        margin-top: -1rem;
+        margin-left: 27rem;
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+    main .middle-section .income-input {
+        width: 80%;
+        margin-left: -8rem;
+    }
+
+    main .middle-section .title h1 {
+        position: relative;
+        width: 140%;
+        font-size: 3.2rem;
+        left: -4rem;
+    }
+
+    main .middle-section .income-input .content .source input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .source h2 {
+        font-size: 1.1rem;
+        width: 100%;
+        margin-left: 3rem;
+    }
+    main .middle-section .income-input .content .amount input {
+        width: 140%;
+    }
+    main .middle-section .income-input .content .amount h2 {
+        font-size: 1.2rem;
+        width: 100%;
+        margin-left: 13rem;
+    }
+    main .middle-section .title h1 {
+        margin-left: 0.1rem;
+        width: 200%;
+    }
+    main .middle-section .income-input .header h2 {
+        font-size: 2rem;
+        width: 200%;
+    }
+
+    main .right-section .container {
+        margin-top: -1rem;
+        margin-left: 24rem;
+        width: 45%;
+    }
+}
+
+/*============================== MEDIA QUERIES : MOBILE PHONES ==============================*/
+
+@media screen and (max-width: 600px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+    main .middle-section .income-input {
+        width: 75%;
+        margin-left: -12rem;
+    }
+
+    main .middle-section .title h1 {
+        position: relative;
+        width: 140%;
+        font-size: 2.8rem;
+        left: -6rem;
+    }
+
+    main .middle-section .income-input .content .source input {
+        width: 110%;
+    }
+    main .middle-section .income-input .content .source h2 {
+        font-size: 1.1rem;
+        width: 100%;
+        margin-left: 3rem;
+    }
+    main .middle-section .income-input .content .amount input {
+        width: 110%;
+    }
+    main .middle-section .income-input .content .amount h2 {
+        font-size: 1.2rem;
+        width: 100%;
+        margin-left: 13rem;
+    }
+    main .middle-section .title h1 {
+        margin-left: 0.1rem;
+        width: 200%;
+    }
+    main .middle-section .income-input .header h2 {
+        font-size: 2rem;
+        width: 200%;
+    }
+
+    main .right-section .container {
+        margin-top: -1rem;
+        margin-left: 21rem;
+        width: 40%;
+    }
+}
+
+/* Add to your existing CSS */
+.text-success {
+    color: var(--color-success);
+}
+
+.text-danger {
+    color: var(--color-danger);
+}
+
+.badge span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.badge h4 {
+    color: var(--color-dark);
+    font-size: 0.9rem;
+}
+
+.badge h5 {
+    color: var(--color-gray-dark);
+    font-size: 0.8rem;
+}
+
+/* Chart container styling */
+.chart-container {
+    margin-top: 2rem;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: 1rem;
+    position: relative;
+}
+
+.chart-container h3 {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1rem;
+    color: var(--color-dark);
+}

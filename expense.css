@@ -626,7 +626,7 @@ main .right-section .container .cards .content .card {
 main .right-section .container .cards .content .card img{
     margin-right: 4.5rem;
     border-radius: var(--card-border-radius);
-    height: 3rem;
+    height: 5rem;
     width: 10rem;
 }
 
@@ -793,18 +793,55 @@ main .expense-category .category-options .options.active {
     color: var(--color-danger-light);
 }
 
-/* History Item Layout Adjustments */
-.history {
+.history-container {
+    max-height: 300px;           /* Set a maximum height */
+    overflow-y: auto;            /* Add vertical scrolling if needed */
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.8rem;
-    border-bottom: 1px solid var(--color-light);
-    transition: all 0.3s ease;
+    flex-direction: column;
+    gap: 5px;                    /* Consistent spacing between items */
 }
 
-.history:hover {
-    background: var(--color-light);
+/* Make history items more compact */
+.history {
+    padding: 10px;
+    margin-bottom: 5px;          /* Reduced margin between items */
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Make the card and chart sections the same height */
+.cards-section, .chart-section {
+    height: 250px;               /* Match heights */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make the overall layout more balanced */
+.dashboard-container {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 15px;
+}
+
+/* Ensure consistent details element height */
+.history-details details {
+    padding: 5px 0;
+    font-size: 0.9em;
+}
+
+/* Improve summary display */
+.history-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;          /* Less margin */
+}
+
+/* Better dark theme support */
+body.dark-theme .history {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Ensure canvas container is properly sized */
@@ -883,3 +920,745 @@ main .expense-category .category-options .options.active {
     width: 0%;
     transition: width 0.5s ease;
 }
+
+/* ============================== MEDIA QUERIES ============================== */
+
+/* ============================== MEDIA QUERIES : SMALLER DESKTOPS ============================== */
+@media screen and (max-width: 1900px) {
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 10rem;
+    }
+}
+@media screen and (max-width: 1805px) {
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 9rem;
+    }
+    h5 {
+        font-size: 0.6rem;
+    }
+}
+
+@media screen and (max-width: 1800px) {
+    main .middle-section {
+        width: 100%;
+        margin-left: 10rem;
+    }
+
+    main .middle-section .container .header h1 {
+        font-size: 4rem;
+        margin-left: 17rem;
+    }
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 9rem;
+    }
+    h5 {
+        font-size: 0.6rem;
+    }
+    main .right-section {
+        display: flex;
+        align-items: center;
+        margin-top: 55rem;
+        margin-left: -59rem;
+        width: 200%;
+    }
+
+    main .right-section .container .level-container {
+        width: 150%;
+        margin-left: -10rem;
+    }
+}
+
+@media screen and (max-width: 1530px) {
+    main .middle-section {
+        width: 100%;
+        margin-left: 10rem;
+    }
+
+    main .middle-section .container .header {
+        width: 220%;
+    }
+
+    main .middle-section .container .header h1 {
+        font-size: 4rem;
+        margin-left: 17rem;
+    }
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 9rem;
+    }
+    h5 {
+        font-size: 0.6rem;
+    }
+    main .right-section {
+        display: flex;
+        align-items: center;
+        margin-top: 55rem;
+        margin-left: -50rem;
+        width: 200%;
+    }
+
+    main .right-section .container .level-container {
+        width: 150%;
+        margin-left: -10rem;
+    }
+}
+
+@media screen and (max-width: 1475px) {
+    main .middle-section {
+        width: 100%;
+        margin-left: 10rem;
+    }
+
+    main .middle-section .container .header {
+        width: 220%;
+    }
+
+    main .middle-section .container .header h1 {
+        font-size: 4rem;
+        margin-left: 17rem;
+    }
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 8rem;
+    }
+    h5 {
+        font-size: 0.6rem;
+    }
+    main .right-section {
+        display: flex;
+        align-items: center;
+        margin-top: 55rem;
+        margin-left: -45rem;
+        width: 200%;
+    }
+
+    main .right-section .container .level-container {
+        width: 150%;
+        margin-left: -10rem;
+    }
+}
+
+@media screen and (max-width: 1380px) {
+    main .middle-section {
+        width: 100%;
+        margin-left: 10rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    main .middle-section .container .header {
+        width: 220%;
+    }
+
+    main .middle-section .container .header h1 {
+        font-size: 4rem;
+        margin-left: 17rem;
+    }
+
+    main .middle-section .container .add-expense {
+        width: 100%;
+    }
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 8rem;
+    }
+    h5 {
+        font-size: 0.6rem;
+    }
+    main .right-section {
+        display: flex;
+        align-items: center;
+        margin-top: 55rem;
+        margin-left: -45rem;
+        width: 200%;
+    }
+
+    main .right-section .container .level-container {
+        width: 150%;
+        margin-left: -10rem;
+    }
+}
+
+@media screen and (max-width: 1270px) {
+    main .middle-section {
+        width: 100%;
+        margin-left: 10rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    main .middle-section .container .header {
+        width: 220%;
+    }
+
+    main .middle-section .container .header h1 {
+        font-size: 4rem;
+        margin-left: 20rem;
+    }
+
+    main .middle-section .container .add-expense {
+        width: 110%;
+    }
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 8rem;
+    }
+    h5 {
+        font-size: 0.6rem;
+    }
+    main .right-section {
+        display: flex;
+        align-items: center;
+        margin-top: 55rem;
+        margin-left: -40rem;
+        width: 200%;
+    }
+
+    main .right-section .container .level-container {
+        width: 150%;
+        margin-left: -10rem;
+    }
+}
+
+/* ============================== MEDIA QUERIES : TABLETS ============================== */
+@media screen and (max-width: 1024px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 0;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+        main .middle-section {
+        width: 100%;
+        margin-left: 10rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    main .middle-section .container .header {
+        width: 220%;
+    }
+
+    main .middle-section .container .header h1 {
+        font-size: 3rem;
+        margin-left: -1rem;
+    }
+
+    main .middle-section .container .add-expense {
+        width: 80%;
+        margin-left: -20rem;
+    }
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 10.5em;
+        height: 3rem;
+    }
+
+    h5 {
+        font-size: 0.8rem;
+    }
+    main .right-section {
+        display: flex;
+        align-items: center;
+        margin-top: -15rem;
+        margin-left: 12rem;
+        width: 80%;
+    }
+
+    main .right-section .container .level-container {
+        width: 60%;
+        margin-left: -10rem;
+    }
+
+}
+
+@media screen and (max-width: 880px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 0;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+        main .middle-section {
+        width: 100%;
+        margin-left: 10rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    main .middle-section .container .header {
+        width: 220%;
+    }
+
+    main .middle-section .container .header h1 {
+        font-size: 3rem;
+        margin-left: -1rem;
+    }
+
+    main .middle-section .container .add-expense {
+        width: 80%;
+        margin-left: -20rem;
+    }
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 10.5em;
+        height: 3rem;
+    }
+
+    h5 {
+        font-size: 0.8rem;
+    }
+    main .right-section {
+        display: flex;
+        align-items: center;
+        margin-top: -15rem;
+        margin-left: 12rem;
+        width: 80%;
+    }
+
+    main .right-section .container .level-container {
+        width: 60%;
+        margin-left: -10rem;
+    }
+
+    main .right-section .container .lower-section .cards .header h2 {
+        font-size: 1.2rem;
+    }
+    
+    main .right-section .container .lower-section .cards .content .card img {
+        width: 8rem;
+    }
+
+}
+
+@media screen and (max-width: 880px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 0;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+        main .middle-section {
+        width: 100%;
+        margin-left: 10rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    main .middle-section .container .header {
+        width: 220%;
+    }
+
+    main .middle-section .container .header h1 {
+        font-size: 3rem;
+        margin-left: -1rem;
+    }
+
+    main .middle-section .container .add-expense {
+        width: 80%;
+        margin-left: -20rem;
+    }
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 10.5em;
+        height: 3rem;
+    }
+
+    h5 {
+        font-size: 0.8rem;
+    }
+    main .right-section {
+        display: flex;
+        align-items: center;
+        margin-top: -15rem;
+        margin-left: 9rem;
+        width: 80%;
+    }
+
+    main .right-section .container .level-container {
+        width: 60%;
+        margin-left: -10rem;
+    }
+
+    main .right-section .container .lower-section .cards .header h2 {
+        font-size: 1.2rem;
+    }
+    
+    main .right-section .container .lower-section .cards .content .card img {
+        margin-left: 1rem;
+        width: 8rem;
+    }
+
+    main .right-section .container .lower-section .cards .content .card #cash-amount, #debit-amount, #gcash-amount {
+        margin-left: -3rem;
+        font-size: 1rem;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 0;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+        main .middle-section {
+        width: 100%;
+        margin-left: 10rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    main .middle-section .container .header {
+        width: 220%;
+    }
+
+    main .middle-section .container .header h1 {
+        font-size: 2.5rem;
+        margin-left: -1rem;
+    }
+
+    main .middle-section .container .add-expense {
+        width: 100%;
+        margin-left: -20rem;
+    }
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 10.5em;
+        height: 3rem;
+    }
+
+    h5 {
+        font-size: 0.8rem;
+    }
+    main .right-section {
+        display: flex;
+        align-items: center;
+        margin-top: -19rem;
+        margin-left: 5rem;
+        width: 95%;
+    }
+
+    main .right-section .container .level-container {
+        width: 60%;
+        margin-left: -10rem;
+    }
+
+    main .right-section .container .lower-section .cards .header h2 {
+        font-size: 1rem;
+    }
+    
+    main .right-section .container .lower-section .cards .content .card img {
+        margin-left: 1rem;
+        width: 8rem;
+    }
+
+    main .right-section .container .lower-section .cards .content .card #cash-amount, #debit-amount, #gcash-amount {
+        margin-left: -3rem;
+        font-size: 1rem;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 0;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+    main .middle-section {
+        width: 100%;
+        margin-left: 10rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    main .middle-section .container .header {
+        width: 220%;
+    }
+
+    main .middle-section .container .header h1 {
+        font-size: 2.1rem;
+        margin-left: -1rem;
+    }
+
+    main .middle-section .container .add-expense {
+        width: 100%;
+        margin-left: -20rem;
+    }
+    main .middle-section .add-expense .expense-content .expense-category .category-options .options {
+        width: 9.5em;
+        height: 2.2rem;
+    }
+
+    h5 {
+        font-size: 0.6rem;
+    }
+    main .right-section {
+        display: flex;
+        align-items: center;
+        margin-top: -19rem;
+        margin-left: 5rem;
+        width: 95%;
+    }
+
+    main .right-section .container .level-container {
+        width: 60%;
+        margin-left: -10rem;
+    }
+
+    main .right-section .container .lower-section .cards .header h2 {
+        font-size: 0.8rem;
+        margin-left: 1.4rem;
+    }
+    
+    main .right-section .container .lower-section .cards .content .card img {
+        margin-left: 1rem;
+        width: 8rem;
+    }
+
+    main .right-section .container .lower-section .cards .content .card #cash-amount, #debit-amount, #gcash-amount {
+        margin-left: -3rem;
+        font-size: 0.7rem;
+    }
+
+}
+

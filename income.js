@@ -36,7 +36,7 @@ themeBtn.onclick = function () {
 // Initialize theme when page loads
 document.addEventListener('DOMContentLoaded', function() {
     initializeTheme();
-    
+
     const incomeForm = document.querySelector('.income-input');
     const submitButton = incomeForm.querySelector('button');
     const recentTransactions = document.querySelector('.recent-transactions');

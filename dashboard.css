@@ -386,7 +386,7 @@ main .transaction-header {
     margin-top: 1.5rem;
 }
 main .monthly-report {
-    display: grid;  
+    display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10rem;
     justify-content: space-between;

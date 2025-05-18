@@ -1230,3 +1230,260 @@ main .middle-section .container .content .account-options button[value="gcash"].
     opacity: 1;
     transform: translateY(-50%) scale(1.1);
 }
+
+/*============================== MEDIA QUERIES : SMALLER DESKTOPS ==============================*/
+@media screen and (max-width: 2070px) {
+    main .middle-section .container .content .account-options .account-btn {
+        width: 14rem;
+    }
+}
+
+@media screen and (max-width: 1980px) {
+    main .middle-section .container .content .account-options .account-btn {
+        width: 12rem;
+    }
+}
+
+@media screen and (max-width: 1820px) {
+    main .middle-section .container .content .account-options .account-btn {
+        width: 10rem;
+    }
+}
+@media screen and (max-width: 1649px) {
+    main .middle-section .container .content .account-options .account-btn {
+        width: 7rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+}
+@media screen and (max-width: 1365px) {
+    main .middle-section .container .content .account-options .account-btn {
+        width: 5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+}
+/*============================== MEDIA QUERIES : TABLET ==============================*/
+@media screen and (max-width: 1300px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+
+    main .middle-section .container {
+        display: flex;
+        align-items: center;
+        justify-self: center;
+        margin-right: -10rem;
+    }
+
+    main .middle-section .container .header h1{
+        width: 100%;
+    }
+    main .middle-section .container .content .account-options .account-btn {
+        width: 13rem;
+    }
+
+    main .right-section {
+        margin-left: -5rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    main .middle-section .container .content {
+        width: 90%;
+    }
+
+    main .middle-section .container .content .account-options .account-btn {
+        width: 15rem;
+    }
+}
+
+@media screen and (max-width: 1020px) {
+    main .middle-section .container .content .account-options .account-btn {
+        width: 9rem;
+    }
+    main .middle-section .container .header h1{
+        width: 100%;
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 890px) {
+    main .middle-section .container {
+        
+    }
+    main .middle-section .container .content {
+        width: 120%;
+    }
+    main .middle-section .container .content .account-options .account-btn {
+        width: 7rem;
+    }
+    main .middle-section .container .header h1{
+        position: relative;
+        width: 100%;
+        font-size: 2.5rem;
+        left: -5rem;
+    }
+}
+
+/*============================== MEDIA QUERIES : MOBILE PHONES ==============================*/
+
+@media screen and (max-width: 800px) {
+    main .middle-section .container .content {
+        width: 120%;
+    }
+    main .middle-section .container .header h1{
+        position: relative;
+        width: 100%;
+        font-size: 2.5rem;
+        left: -7rem;
+    }
+    main .middle-section .container .content .account-options .account-btn {
+        width: 12rem;
+    }
+}
+
+@media screen and (max-width: 645px) {
+    main .middle-section .container .content {
+        width: 120%;
+    }
+    main .middle-section .container .header h1{
+        position: relative;
+        width: 120%;
+        font-size: 2.5rem;
+        left: -7rem;
+    }
+    main .middle-section .container .content .account-options .account-btn {
+        width: 12rem;
+    }
+}
+
+@media screen and (max-width: 607px) {
+    nav .profile-area {
+        gap: 2.6rem;
+    }
+    main .middle-section .container .content {
+        position: relative;
+        width: 130%;
+        left: 3rem;
+    }
+
+    main .middle-section .container .content .account-options .account-btn {
+        width: 10rem;
+    }
+
+    main section.middle-section .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    nav section.middle-section .fast-payment {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 3rem;
+        gap: 1.5rem;
+    }
+
+    main section.right-section {
+        margin-left: 1rem;
+    }
+}
+
+/* Add to your existing CSS */
+.text-success {
+    color: var(--color-success);
+}
+
+.text-danger {
+    color: var(--color-danger);
+}
+
+.badge span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.badge h4 {
+    color: var(--color-dark);
+    font-size: 0.9rem;
+}
+
+.badge h5 {
+    color: var(--color-gray-dark);
+    font-size: 0.8rem;
+}
+
+/* Chart container styling */
+.chart-container {
+    margin-top: 2rem;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: 1rem;
+    position: relative;
+}
+
+.chart-container h3 {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1rem;
+    color: var(--color-dark);
+}

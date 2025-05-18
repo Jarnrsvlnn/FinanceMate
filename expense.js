@@ -10,7 +10,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const paymentButtons = document.querySelectorAll('.payment-btn');
     const cancelButton = document.querySelector('.cancel-btn');
     const pieChartCanvas = document.getElementById('line-chart');
-    const themeBtn = document.querySelector('.theme-btn'); // Added theme button
+    const themeBtn = document.querySelector('.theme-btn');
+    // Menu Button Functionality
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const sidebar = document.querySelector('aside');
+
+    if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+            sidebar.style.display = 'block';
+            sidebar.style.left = '0';
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            sidebar.style.left = '-100%';
+        });
+    }
+
+    // Card balance displays
+    const cashAmountDisplay = document.getElementById('cash-amount');
+    const debitAmountDisplay = document.getElementById('debit-amount');
+    const gcashAmountDisplay = document.getElementById('gcash-amount');
 
     // State variables
     let selectedCategory = null;
@@ -48,6 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
     updateLevelDisplay();
     loadExpenses();
     updatePieChart();
+    updateCardBalances(); // Initialize card balances
+
+    // Add delete buttons to cards
+    addDeleteButtons(); // Added this line to initialize card delete buttons
 
     // Category selection
     categoryOptions.forEach(option => {
@@ -109,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.toggle('dark-theme');
             themeBtn.querySelector('span:first-child').classList.toggle('active');
             themeBtn.querySelector('span:last-child').classList.toggle('active');
-            // Store theme preference in localStorage instead of sessionStorage
             localStorage.setItem('darkTheme', document.body.classList.contains('dark-theme'));
         };
     }
@@ -195,9 +220,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         sessionStorage.setItem('budgetData', JSON.stringify(budgetData));
 
+        // Update card displays
+        updateCardBalances();
+
         // Decrease level
         decreaseLevel();
         updatePieChart();
+    }
+
+    function updateCardBalances(expense = null) {
+        const budgetData = JSON.parse(sessionStorage.getItem('budgetData')) || {};
+
+        // If an expense was provided, update the balances
+        if (expense) {
+            const amount = parseFloat(expense.amount);
+            switch(expense.paymentMethod) {
+                case 'cash':
+                    budgetData.cashBalance = (budgetData.cashBalance || 0) - amount;
+                    break;
+                case 'debit':
+                    budgetData.debitBalance = (budgetData.debitBalance || 0) - amount;
+                    break;
+                case 'gcash':
+                    budgetData.gcashBalance = (budgetData.gcashBalance || 0) - amount;
+                    break;
+            }
+            sessionStorage.setItem('budgetData', JSON.stringify(budgetData));
+        }
+
+        // Update the display
+        cashAmountDisplay.textContent = `₱ ${(budgetData.cashBalance || 0).toFixed(2)}`;
+        debitAmountDisplay.textContent = `₱ ${(budgetData.debitBalance || 0).toFixed(2)}`;
+        gcashAmountDisplay.textContent = `₱ ${(budgetData.gcashBalance || 0).toFixed(2)}`;
     }
 
     function updatePieChart() {
@@ -257,26 +311,6 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem('expenses', JSON.stringify(expenses));
 
         // Trigger storage event manually
-        window.dispatchEvent(new Event('storage'));
-    }
-
-    function updateCardBalances(expense) {
-        const budgetData = JSON.parse(sessionStorage.getItem('budgetData')) || {};
-        const amount = parseFloat(expense.amount);
-
-        switch(expense.paymentMethod) {
-            case 'cash':
-                budgetData.cashBalance = (budgetData.cashBalance || 0) - amount;
-                break;
-            case 'debit':
-                budgetData.debitBalance = (budgetData.debitBalance || 0) - amount;
-                break;
-            case 'gcash':
-                budgetData.gcashBalance = (budgetData.gcashBalance || 0) - amount;
-                break;
-        }
-
-        sessionStorage.setItem('budgetData', JSON.stringify(budgetData));
         window.dispatchEvent(new Event('storage'));
     }
 
@@ -356,7 +390,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize theme function
     function initializeTheme() {
-        // Use localStorage instead of sessionStorage for theme persistence
         if (localStorage.getItem('darkTheme') === 'true') {
             document.body.classList.add('dark-theme');
             if (themeBtn) {
@@ -377,6 +410,134 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // ==================== CARD DELETE FUNCTIONS ====================
+
+    // Add delete buttons to cards
+    function addDeleteButtons() {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            // Check if delete button already exists
+            if (!card.querySelector('.card-delete-btn')) {
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'card-delete-btn';
+                deleteBtn.innerHTML = '<span class="material-symbols-outlined">delete</span>';
+                deleteBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent event bubbling
+                    showDeleteForm(card.id);
+                });
+                card.appendChild(deleteBtn);
+            }
+        });
+    }
+
+    function showDeleteForm(cardId) {
+        // Create modal
+        const modal = document.createElement('div');
+        modal.className = 'delete-modal';
+        modal.style.display = 'flex';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        modal.style.justifyContent = 'center';
+        modal.style.alignItems = 'center';
+        modal.style.zIndex = '1000';
+
+        modal.innerHTML = `
+            <div class="delete-modal-content" style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.3); width: 80%; max-width: 300px; text-align: center;">
+                <h3 style="margin-top: 0;">DELETE FROM ${cardId.replace('-card', '').toUpperCase()}</h3>
+                <input type="number" id="delete-amount" placeholder="Enter amount to remove" style="width: 90%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc;">
+                <div class="modal-buttons" style="display: flex; justify-content: space-around; margin-top: 20px;">
+                    <button class="confirm-delete" style="padding: 10px 20px; background-color: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer;">CONFIRM</button>
+                    <button class="cancel-delete" style="padding: 10px 20px; background-color: #6c757d; color: white; border: none; border-radius: 5px; cursor: pointer;">CANCEL</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        // Focus on the input field
+        setTimeout(() => {
+            modal.querySelector('#delete-amount').focus();
+        }, 100);
+
+        // Add event listeners
+        modal.querySelector('.confirm-delete').addEventListener('click', function() {
+            const amount = parseFloat(modal.querySelector('#delete-amount').value);
+            if (isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+            deleteFromCard(cardId, amount);
+            modal.remove();
+        });
+
+        modal.querySelector('.cancel-delete').addEventListener('click', function() {
+            modal.remove();
+        });
+
+        // Close on pressing escape key
+        document.addEventListener('keydown', function escHandler(e) {
+            if (e.key === 'Escape') {
+                modal.remove();
+                document.removeEventListener('keydown', escHandler);
+            }
+        });
+
+        // Also add specific dark theme handling
+        const isDarkTheme = document.body.classList.contains('dark-theme');
+        if (isDarkTheme) {
+            const modalContent = modal.querySelector('.delete-modal-content');
+            modalContent.style.backgroundColor = '#333';
+            modalContent.style.color = '#fff';
+            const input = modal.querySelector('#delete-amount');
+            input.style.backgroundColor = '#444';
+            input.style.color = '#fff';
+            input.style.borderColor = '#555';
+        }
+    }
+
+    function deleteFromCard(cardId, amount) {
+        const cardType = cardId.replace('-card', '');
+        const budgetData = JSON.parse(sessionStorage.getItem('budgetData')) || {};
+
+        // Check if enough funds exist
+        if (cardType === 'cash' && amount > (budgetData.cashBalance || 0)) {
+            alert('Insufficient funds in cash account');
+            return;
+        }
+        if (cardType === 'debit' && amount > (budgetData.debitBalance || 0)) {
+            alert('Insufficient funds in debit account');
+            return;
+        }
+        if (cardType === 'gcash' && amount > (budgetData.gcashBalance || 0)) {
+            alert('Insufficient funds in GCash account');
+            return;
+        }
+
+        // Update balances
+        switch(cardType) {
+            case 'cash':
+                budgetData.cashBalance = (budgetData.cashBalance || 0) - amount;
+                break;
+            case 'debit':
+                budgetData.debitBalance = (budgetData.debitBalance || 0) - amount;
+                break;
+            case 'gcash':
+                budgetData.gcashBalance = (budgetData.gcashBalance || 0) - amount;
+                break;
+        }
+
+        // Save and update
+        sessionStorage.setItem('budgetData', JSON.stringify(budgetData));
+        updateCardBalances();
+
+        // Decrease level when money is removed from card
+        decreaseLevel();
+    }
+
     // Initialize chart.js if not already loaded
     if (typeof Chart === 'undefined') {
         const script = document.createElement('script');
@@ -384,5 +545,4 @@ document.addEventListener('DOMContentLoaded', function() {
         script.onload = updatePieChart;
         document.head.appendChild(script);
     }
-}
-);
+});

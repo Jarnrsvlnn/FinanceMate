@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         displayUsername();
     });
 
+
     // ========== Event Listeners ==========
     if (menuBtn) menuBtn.onclick = () => sidebar.style.display = 'block';
     if (closeBtn) closeBtn.onclick = () => sidebar.style.display = 'none';

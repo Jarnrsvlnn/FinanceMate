@@ -506,6 +506,7 @@ main section.right-section .container .level-container {
     height: 10rem;
     width: 100%;
     margin-bottom: 1.5rem;
+    margin-left: -8rem;
     padding-bottom: 1rem;
 }
 
@@ -569,10 +570,65 @@ main section.right-section .container .lower-section {
     justify-content: center;
     flex-direction: row;
     height: 100vh;
-    width: 100%;
+    margin-left: -10rem;
+    width: 120%;
     gap: 1rem;
 }
 
+/*============================== CARDS UPDATE STYLES ==============================*/
+
+main .right-section .container .cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    height: 27vh;
+    width: 40%;
+}
+
+main .right-section .container .cards .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 2rem;
+    margin-left: -2.5rem;
+}
+
+main .right-section .container .cards .header h2 {
+    font-size: 1.7rem;
+}
+main .right-section .container .cards .header img {
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+}
+
+main .right-section .container .cards .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: -2rem;
+    gap: 1rem;
+    width: 100%;
+}
+
+main .right-section .container .cards .content .card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+main .right-section .container .cards .content .card img{
+    margin-right: 4.5rem;
+    border-radius: var(--card-border-radius);
+    height: 3rem;
+    width: 10rem;
+}
 
 /*============================== BAR GRAPH STYLES ==============================*/
 
@@ -592,7 +648,7 @@ main section.right-section .container .recent-expenses {
     background: var(--color-white);
     border-radius: var(--card-border-radius);
     height: 40vh;
-    width: 60%;
+    width: 40%;
     padding: var(--card-padding);
 }
 

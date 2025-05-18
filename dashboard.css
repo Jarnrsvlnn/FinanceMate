@@ -386,7 +386,7 @@ main .transaction-header {
     margin-top: 1.5rem;
 }
 main .monthly-report {
-    display: grid;
+    display: grid;  
     grid-template-columns: repeat(4, 1fr);
     gap: 10rem;
     justify-content: space-between;
@@ -469,12 +469,12 @@ main .recent-payment .badge span {
 main .recent-payment .badge div {
     display: flex;
     flex-direction: row;
-    gap: 0.3rem;
+    gap: 0.7rem;
     overflow: hidden;
 }
 
 main .recent-payment .badge h5 {
-    font-size: 0.7rem;
+    font-size: 1rem;
     color: var(--color-gray-dark);
     white-space: nowrap;
     overflow: hidden;
@@ -482,7 +482,7 @@ main .recent-payment .badge h5 {
 }
 
 main .recent-payment .badge h4 {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     color: var(--color-dark);
     font-weight: bold;
     white-space: nowrap;
@@ -492,7 +492,22 @@ main .recent-payment .badge h4 {
 
 /*============================== MIDDLE SECTION: LINE GRAPH ==============================*/
 
-canvas#line-chart {
+main .middle-section .visual {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.visual canvas#line-chart {
+    background: var(--color-white);
+    max-width: 100%;
+    margin-top: 2rem;
+    border-radius: var(--card-border-radius);
+    padding: var(card-padding);
+    height: 27rem;
+}
+
+.visual canvas#chart {
     background: var(--color-white);
     max-width: 100%;
     margin-top: 2rem;

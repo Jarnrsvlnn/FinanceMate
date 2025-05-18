@@ -1,0 +1,567 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Press+Start+2P&display=swap');
+
+/* CSS VARIABLES */
+:root {
+    --color-white: #ffffff;
+    --color-light: #f0eff5;
+    --color-gray-light: 86848c;
+    --color-gray-dark: #56555e;
+    --color-dark: #27282f;
+    --color-primary: rgb(71, 7, 234);
+    --color-success: rgb(34, 202, 75);
+    --color-danger: rgb(255, 67, 54);
+    --color-warning: rgb(234, 181, 7);
+    --color-purple: rgb(160, 99, 245);
+
+    --color-primary-light: rgba(71, 7, 234, 0.2);
+    --color-success-light: rgba(34, 202, 75, 0.2);
+    --color-danger-light: rgba(255, 67, 54, 0.2);
+    --color-purple-light: rgba(160, 99, 245, 0.2);
+
+    --card-padding: 1.6rem;
+    --padding-1: 1rem;
+    --padding-2: 8px;
+
+    --card-border-radius: 1.6rem;
+    --border-radius-1: 1rem;
+    --border-radius-2: 6px;
+}
+
+.dark-theme {
+    --color-white: #131316;
+    --color-light: #23232a;
+    --color-dark: #ddd;
+    --color-gray-dark: #adacb5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    appearance: none;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+
+html {
+    font-size: 13px;
+}
+
+body {
+    background: var(--color-light);
+    font-family: 'Press Start 2P', sans-serif;
+    min-height: 100vh;
+    color: var(--color-dark);
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+h5 {
+    font-size: 0.86rem;
+    font-weight: 500;
+}
+
+h6 {
+    font-size: 0.76rem;
+}
+
+p {
+    font-size: 0.86rem;
+    color: var(--color-gray-dark);
+}
+
+small {
+    font-weight: 300;
+    font-size: 0.77rem;
+}
+
+.text-muted {
+    color: var(--color-gray-dark);
+}
+
+.bg-primary {
+    color: var(--color-primary);
+    box-shadow: 0 0.8rem 0.8rem var(--color-primary-light);
+}
+
+.bg-danger {
+    color: var(--color-danger);
+    box-shadow: 0 0.8rem 0.8rem var(--color-danger-light);
+}
+
+.bg-success {
+    color: var(--color-success);
+    box-shadow: 0 0.8rem 0.8rem var(--color-success-light);
+}
+
+.bg-purple {
+    color: var(--color-purple);
+    box-shadow: 0 0.8rem 0.8rem var(--color-purple-light);
+}
+
+.bird-dark {
+    background: 27282f;
+    box-shadow: 0 0.8rem 0.8rem var(0, 0, 0 , );
+}
+
+/* ==============================  NAV BAR ==============================*/
+
+nav {
+    width: 100%;
+    background: var(--color-white);
+    padding: 1rem 0;
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 96%;
+    height: 4vh;
+    margin: 0 auto;
+}
+
+nav .container h1 {
+    background: linear-gradient(
+        to right,
+        rgb(250, 78, 10),
+        rgb(247, 12, 204),
+        rgb(0, 106, 255),
+        rgb(48, 248, 255),
+        rgb(250, 78, 10)
+    );
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradientAnimation 5s linear infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 200% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+nav .profile-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+nav .profile-area .theme-btn {
+    display: flex;
+    background: var(--color-light);
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: var(--border-radius-2);
+    cursor: pointer;
+}
+
+nav .profile-area .theme-btn span {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+nav .profile-area .theme-btn .active {
+    background: var(--color-dark);
+    border-radius: var(--border-radius-2);
+    color: var(--color-white);
+}
+
+nav .profile-area .profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+nav .profile-area button {
+    display: none;
+}
+
+/*============================== SIDEBAR STYLES ==============================*/
+
+main {
+    display: grid;
+    grid-template-columns: 16rem auto 30rem;
+    gap: 2rem;   ;
+    width: 96%;
+    margin: 1rem auto 4rem;
+    padding-top: 2.5rem;
+}
+main aside .sidebar h4 {
+    font-size: 0.9rem;
+}
+
+main aside .close-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 88vh;
+}
+
+
+main aside button#close-btn{
+    display: none;
+}
+
+main aside .sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    height: 4.2rem;
+    color: var(--color-gray-light);
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+main aside .sidebar a span {
+    font-size: 1.7rem;
+    margin-left: 3rem;
+    transition: all 300ms ease;
+}
+
+main aside .sidebar a.active {
+    background: var(--color-white);
+    color: var(--color-primary);
+
+}
+
+main aside .sidebar a.active:before {
+    content: '';
+    width: 6px;
+    height: 100%;
+    position: absolute;
+    background: var(--color-primary);
+}
+
+main aside .sidebar a:hover {
+    color: var(--color-primary);
+}
+
+main aside .sidebar a:hover span {
+    margin-left: 2rem;
+}
+
+/*============================== MIDDLE SECTION STYLES ==============================*/
+
+main .middle-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 85vh;
+    width: 80%;
+    gap: 5rem;
+    padding: 0 1rem;
+}
+
+main .middle-section .title h1 {
+    margin: 1rem 0 0 -35rem;
+    font-size: 2.5rem;
+    background: linear-gradient(
+        to right,
+        rgb(250, 78, 10),
+        rgb(247, 12, 204),
+        rgb(0, 106, 255),
+        rgb(48, 248, 255),
+        rgb(250, 78, 10)
+    );
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradientAnimation 5s linear infinite;
+}
+
+main .middle-section .income-input {
+    display: flex;
+    height: 70vh;
+    width: 70%;
+    border-radius: var(--card-border-radius);
+    background: var(--color-white);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8rem;
+}
+
+main .middle-section .income-input .header h2 {
+    font-size: 3rem;
+}
+
+main .middle-section .income-input .content {
+    display: flex;
+    height: 40vh;
+    width: 90%;
+    align-items: center;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+main .middle-section .income-input .content .source {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+main .middle-section .income-input .content .source input{
+    width: 140%;
+    height: 5vh;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    border-radius: var(--border-radius-1);
+    padding: 0;
+    color: white;
+    background: var(--color-light);
+    border: rgb(201, 201, 201) 2px solid;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+main .middle-section .income-input .content .amount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+main .middle-section .income-input .content .amount input{
+    width: 150%;
+    height: 5vh;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    border-radius: var(--border-radius-1);
+    padding: 0;
+    color: white;
+    background: var(--color-light);
+    border: rgb(201, 201, 201) 2px solid;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+main .middle-section .income-input .content button {
+    width: 50%;
+    height: 5vh;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    border-radius: var(--border-radius-1);
+    padding: 0;
+    color: white;
+    background: var(--color-primary);
+    border: rgb(201, 201, 201) 2px solid;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/*============================== RIGHT SECTION STYLES ==============================*/
+main .right-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 150%;
+    margin-left: -20rem;
+    gap: 10rem;
+    padding: 0 1rem;
+}
+
+main .right-section .container {
+    display: flex;
+    align-items: center;
+    margin-top: 9rem;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    height: 70vh;
+    padding: 0 1rem;
+}
+
+/*============================== LEVEL STYLES ==============================*/
+
+main section.right-section .level-container {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    height: 12rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+main section.right-section .level-container .level-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--card-padding);
+    padding-bottom: 0;
+}
+
+main section.right-section .level-container .level-header img {
+    width: 3rem;
+    height: 3rem;
+}
+
+main section.right-section .level-container .progress-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: var(--card-padding);
+}
+
+main section.right-section .level-container .progress-bar-container img {
+    width: 3rem;
+    height: 4rem;
+    margin-right: 1.5rem;
+    padding-bottom: 0.8rem;
+}
+
+main section.right-section .level-container .streak-info h1 {
+    font-family: 'Press Start 2P', cursive;
+}
+
+main section.right-section .level-container .progress-bar-container {
+    width: 100%;
+    padding: 0 1.5rem;
+    margin-top: 1rem;
+}
+
+main section.right-section .level-container .progress-bar {
+    width: 100%;
+    height: 18px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+main section.right-section .level-container .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--color-success), var(--color-primary));
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/*============================== RECENT TRANSACTION STYLES ==============================*/
+
+main section.right-section .recent-transactions {
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    width: 100%;
+    height: 60vh;
+}
+
+main section.right-section .recent-transactions .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--card-padding);
+    padding-bottom: 0;
+}
+
+main section.right-section .recent-transactions .header h2, span {
+    font-size: 1.5rem;
+    font-weight: 1000;
+}
+
+main section.right-section .recent-transactions .history h4{
+    font-size: 0.8rem;
+}
+
+main section.right-section .recent-transactions .history {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: var(--card-padding);
+    border-bottom: 1px solid var(--color-light);
+    transition: all 200ms ease;
+}
+
+main section.right-section .recent-transactions .history:last-child {
+    border: none;
+}
+
+main section.right-section .recent-transactions .history:hover {
+    background: var(--color-light);
+    cursor: pointer;
+}
+
+/* Transactions Container Styles */
+.recent-transactions {
+    height: 300px; /* Fixed height for scrollable area */
+    display: flex;
+    flex-direction: column;
+}
+
+.transactions-container {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 5px; /* Prevents scrollbar from overlapping content */
+}
+
+/* Scrollbar styling */
+.transactions-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.transactions-container::-webkit-scrollbar-track {
+    background: var(--color-light);
+    border-radius: 10px;
+}
+
+.transactions-container::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 10px;
+}
+
+.transactions-container::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-light);
+}
+
+/* History item styling */
+.history {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    position: relative;
+}
+
+.history:hover {
+    box-shadow: none;
+}

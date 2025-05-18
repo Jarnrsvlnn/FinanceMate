@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Mulish', sans-serif;
+    color:rgb(255, 255, 255);
+}
+
+body {
+    background-color: rgb(5, 5, 5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.outer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.inner-container {
+    margin: 0 auto;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;
+}
+
+.container-heading { 
+    display: flex;
+    width: 100%;
+    align-self: flex-start;
+    flex-direction: column;
+    padding: 30px 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-heading h1 {
+    font-size: 3rem; 
+    font-family: 'Press Start 2P', sans-serif;
+    background: linear-gradient(
+        to right,
+        rgb(250, 78, 10),
+        rgb(247, 12, 204),
+        rgb(0, 106, 255),
+        rgb(48, 248, 255),
+        rgb(250, 78, 10)
+    );
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradientAnimation 5s linear infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 200% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container-heading p {
+    padding-top: 10px;
+    font-size: 1rem; 
+    font-family: 'Press Start 2P', sans-serif;
+}
+
+.container-form {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(12, 12, 12);
+    height: 100%;
+    width: 60%;
+    padding: 20px;
+    align-self: center;
+    border-radius: 10px;
+    position: relative;
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.container-form::after, .container-form::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(
+        from var(--angle),
+        rgb(250, 78, 10),
+        rgb(247, 12, 204),
+        rgb(0, 106, 255),
+        rgb(48, 248, 255),
+        rgb(250, 78, 10)
+    );
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 3px;
+    border-radius: 10px;
+    animation: 3s spin linear infinite;
+}
+
+.container-form::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+}
+
+@keyframes spin {
+    from{
+        --angle: 0deg   ;
+    }
+    to{
+        --angle: 360deg;
+    }
+}
+
+.form-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 70px 0;
+    text-align: center;
+}
+
+.form-text p {
+    font-family: 'Jersey 15', sans-serif;
+    font-size: 2.5rem;
+}
+
+#error-message {
+    padding-top: 20px;
+    text-align: center; 
+    font-family: 'Jersey 15', sans-serif;
+    font-size: 1.3rem; 
+    color: red; 
+    width: 90%; 
+}
+
+
+.input-cases {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 55px;
+}
+
+.input-cases input {
+    padding: 10px 20px;
+    width: 90%;
+    height: 55px;
+    background-color:rgb(15, 15, 15);
+    border: none;
+    background-color: rgb(41, 41, 41);
+    border-radius: 10px;
+    font-family: 'Jersey 15', sans-serif;
+    font-size: 1.2rem;
+    outline: none;
+}
+
+.input-cases input:hover {  
+    outline: 1px solid rgb(255, 255, 255);
+}
+
+.sign-in_button button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 45px;
+    background-color: rgb(25, 0, 255);
+    border-radius: 10px;
+    border: none;
+    font-size: 0.9rem; 
+    font-family: 'Jersey 15', sans-serif;
+    font-size: 1.8rem;
+    cursor: pointer;
+    margin-top: 80px;
+    margin-left: 25px;
+    margin-right: 25px;
+    
+}
+
+.sign-in_button button:active {
+    transform: scale(0.95);
+}
+
+

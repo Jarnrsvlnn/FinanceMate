@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="expense.css">
+
+    <!--==================================== SYMBOLS/ICONS/FONTS ====================================-->
+    <script src="https://kit.fontawesome.com/4f0795385b.js
+" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1>FINANCEMATE</h1>
+            <div class="profile-area">
+                <div class="theme-btn">
+                    <span class="material-symbols-outlined active">light_mode</span>
+                    <span class="material-symbols-outlined">dark_mode</span>
+                </div>
+                <button id="menu-btn">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!--==================================== END OF NAVIGATION BAR ====================================-->
+
+    <main>
+        <aside>
+            <button id="close-btn">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+
+            <div class="sidebar">
+                <a href="dashboard.html" class="active" onclick="location.reload()">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <h4>DASHBOARD</h4>
+                </a>
+                <a href="expense.html" class="active">
+                    <span class="material-symbols-outlined">payments</span>
+                    <h4>EXPENSES</h4>
+                </a>
+                <a href="budget.html">
+                    <span class="material-symbols-outlined">attach_money</span>
+                    <h4>BUDGET</h4>
+                </a>
+                <a href="income.html">
+                    <span class="material-symbols-outlined">money_bag</span>
+                    <h4>INCOME</h4>
+                </a>
+                <a href="about.html">
+                    <span class="material-symbols-outlined">info</span>
+                    <h4>ABOUT US</h4>
+                </a>
+            </div>
+        </aside>
+
+        <!--==================================== END OF ASIDE BAR ====================================-->
+
+        <section class="middle-section">
+            <div class="container">
+                <div class="header">
+                    <h1>EXPENSES MANAGER</h1>
+                </div>
+                <div class="add-expense">
+                    <div class="expense-header">
+                        <h2>NEW EXPENSE</h2>
+                        <span class="material-symbols-outlined">add</span>
+                    </div>
+                    <div class="expense-content">
+                        <div class="input-fields">
+                            <div class="amount">
+                                <h3>AMOUNT</h3>
+                                <input type="number" id="amount" required>
+                            </div>
+
+                            <div class="description">
+                                <h3>DESCRIPTION</h3>
+                                <input type="text" id="description" required>
+                            </div>
+                        </div>
+
+                        <div class="expense-category">
+                            <div class="category-header">
+                                <h3>CHOOSE CATEGORY</h3>
+                                <span class="material-symbols-outlined">category</span>
+                            </div>
+                            <div class="category-options">
+                                <div class="options">
+                                    <div>
+                                        <h5>Housing</h5>
+                                    </div>
+                                </div>
+                                <div class="options">
+                                    <div>
+                                        <h5>Utilities</h5>
+                                    </div>
+                                </div>
+                                <div class="options">
+                                    <div>
+                                        <h5>Transportation</h5>
+                                    </div>
+                                </div>
+                                <div class="options">
+                                    <div>
+                                        <h5>Health</h5>
+                                    </div>
+                                </div>
+                                <div class="options">
+                                    <div>
+                                        <h5>Shopping</h5>
+                                    </div>
+                                </div>
+                                <div class="options">
+                                    <div>
+                                        <h5>Entertainment</h5>
+                                    </div>
+                                </div>
+                                <div class="options">
+                                    <div>
+                                        <h5>Food</h5>
+                                    </div>
+                                </div>
+                                <div class="options">
+                                    <div>
+                                        <h5>Insurance</h5>
+                                    </div>
+                                </div>
+                                <div class="options">
+                                    <div>
+                                        <h5>Others</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button>SAVE</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================================== END OF MIDDLE SECTION ====================================-->
+
+        <section class="right-section">
+            <div class="container">
+                <div class="level-container">
+                    <div class="level-header">
+                        <h2>Level 1</h2>
+                        <img src="img/exp.gif" alt="Level Up Animation" class="level-icon">
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="expFill" style="width: 0%;"></div>
+                        </div>
+                        <img src="img/fireStreak.gif" alt="streakAnimation">
+                        <p class="exp-text" id="expText">0 / 100 EXP</p>
+                    </div>
+                </div>
+                <!--=================== END OF LEVEL SECTION ======================-->
+                <div class="lower-section">
+                    <canvas id="line-chart"></canvas>
+                    <!--=================== END OF PIE GRAPH SECTION ======================-->
+                    <div class="recent-expenses">
+                        <div class="header">
+                            <h2>RECENT EXPENSES</h2>
+                            <span class="material-symbols-outlined">history</span>
+                        </div>
+                        <div class="history-container">
+
+                        </div>
+                    </div>
+                    <div class="modal" id="payment-modal">
+                      <div class="modal-content">
+                        <h2>SELECT PAYMENT METHOD</h2>
+                        <div class="payment-options">
+                          <button class="payment-btn" value="cash">
+                            <img src="img/cashOption.jpg" alt="Cash">
+                            <span>Cash</span>
+                          </button>
+                          <button class="payment-btn" value="debit">
+                            <img src="img/debitOption.jpg" alt="Debit Card">
+                            <span>Debit Card</span>
+                          </button>
+                          <button class="payment-btn" value="gcash">
+                            <img src="img/gcashOption.png" alt="GCash">
+                            <span>GCash</span>
+                          </button>
+                        </div>
+                        <button class="cancel-btn">CANCEL</button>
+                      </div>
+                    </div>
+<script src="expense.js"></script>
+</html>

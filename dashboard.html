@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceMate Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+
+    <!--==================================== SYMBOLS/ICONS/FONTS ====================================-->
+    <script src="https://kit.fontawesome.com/4f0795385b.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1>FINANCEMATE</h1>
+            <div class="profile-area">
+                <div class="theme-btn">
+                    <span class="material-symbols-outlined active">light_mode</span>
+                    <span class="material-symbols-outlined">dark_mode</span>
+                </div>
+                <button id="menu-btn">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!--==================================== END OF NAVIGATION BAR ====================================-->
+
+    <main>
+        <aside>
+            <button id="close-btn">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+
+            <div class="sidebar">
+                <a href="dashboard.html" class="active" onclick="location.reload()">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <h4>DASHBOARD</h4>
+                </a>
+                <a href="expense.html">
+                    <span class="material-symbols-outlined">payments</span>
+                    <h4>EXPENSES</h4>
+                </a>
+                <a href="budget.html">
+                    <span class="material-symbols-outlined">attach_money</span>
+                    <h4>BUDGET</h4>
+                </a>
+                <a href="income.html">
+                    <span class="material-symbols-outlined">money_bag</span>
+                    <h4>INCOME</h4>
+                </a>
+                <a href="about.html">
+                    <span class="material-symbols-outlined">info</span>
+                    <h4>ABOUT US</h4>
+                </a>
+            </div>
+        </aside>
+
+        <!---------------- END OF ASIDE SECTION --------------->
+
+        <section class="middle-section">
+            <div class="header">
+                <h1>Overview</h1>
+                <input type="date">
+            </div>
+
+            <div class="cards-container">
+                <div class="card">
+                    <div class="top">
+                        <div class="left">
+                            <img src="img/Peso.png" alt="peso">
+                            <h2>CASH</h2>
+                        </div>
+                    </div>
+                    <div class="middle">
+                        <h1>This is where the Total budget amount on cash should be displayed based on the budget part</h1>
+                    </div>
+                    <div class="bottom">
+                        <div class="left">
+                            <small>Cash Holder</small>
+                            <h5>this is where the inputed username will appear</h5>
+                        </div>
+
+                    </div>
+                </div>
+                <!------------------------------- END OF CARD 1 ------------------------------>
+                <div class="card">
+                    <div class="top">
+                        <div class="left">
+                            <img src="img/debitCard.png" alt="Debit Card">
+                            <h2>DEBIT CARD</h2>
+                        </div>
+                    </div>
+                    <div class="middle">
+                        <h1>This is where the Total budget amount on debit card should be displayed based on the budget part</h1>
+                        <img src="img/card chip.png" alt="chip" class="chip">
+                    </div>
+                    <div class="bottom">
+                        <div class="left">
+                            <small>Card Holder</small>
+                            <h5>This is where the inputed username will appear</h5>
+                        </div>
+
+                    </div>
+                </div>
+                <!------------------------------- END OF CARD 2 ------------------------------>
+                <div class="card">
+                    <div class="top">
+                        <div class="left">
+                            <img src="img/gcash.png" alt="GCash">
+                            <h2>GCASH</h2>
+                        </div>
+                    </div>
+                    <div class="middle">
+                        <h1>This is where the Total budget amount on gcash should be displayed based on the amount input in the budget part</h1>
+                        <img src="img/gcashOption.png" alt="chip" class="chip">
+                    </div>
+                    <div class="bottom">
+                        <div class="left">
+                            <small>Account Holder</small>
+                            <h5>This is where the inputed username will appear</h5>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--------------END OF CARDS CONTAINER -------------->
+            <div class="transaction-header">
+                <h2>Transactions Report</h2>
+            </div>
+
+            <div class="monthly-report">
+                <div class="report">
+                    <h3>Income</h3>
+                    <div>
+                        <details>
+                            <h1>This is where the Total Amount of income should be displayed based on what the user input in the source of income part. This amount is not affected when the income is subtracted when it is used on budgeting</h1>
+                        </details>
+                    </div>
+                </div>
+                <!-------------- END OF INCOME REPORT -------------->
+                <div class="report">
+                    <h3>Expenses</h3>
+                    <div>
+                        <details>
+                            <h1>This is where the Total Amount of Expenses should be displayed based on what the user inpur in the expenses part, this amount is not affected by deleting recent transaction</h1>
+                        </details>
+                    </div>
+                </div>
+                <!-------------- END OF EXPENSES REPORT -------------->
+
+            </div>
+
+            <!--==================================== END OF MONTHLY REPORT ====================================-->
+
+            <div class="recent-payment">
+                <h2>Recent Payment</h2>
+                <div class="badge-container">
+                    <div class="badge"></div>
+                    <div class="badge">
+                        <span class="bg-primary"></span>
+                        <div>
+                            <h5>This is where history of recent expenses should show. This will show the category</h5>
+                            <h4>this will show the amount</h4>
+                        </div>
+                    </div>
+                    <div class="badge">
+                        <span class="bg-success"></span>
+                        <div>
+                            <h5>Utilities These are example</h5>
+                            <h4>$50examples</h4>
+                        </div>
+                    </div>
+                    <div class="badge">
+                        <span class="bg-primary"></span>
+                        <div>
+                            <h5>Housingexamples</h5>
+                            <h4>$50examples</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--==================================== END OF FAST PAYMENT ====================================-->
+
+            <canvas id="line-chart"></canvas>
+
+        </section>
+
+        <!--==================================== END OF MIDDLE SECTION ====================================-->
+
+        <section class="right-section">
+            <div class="level-container">
+                <div class="level-header">
+                    <h2>Level 1</h2>
+                    <img src="img/exp.gif" alt="Level Up Animation" class="level-icon">
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="expFill" style="width: 0%;"></div>
+                    </div>
+                    <img src="img/fireStreak.gif" alt="streakAnimation">
+                    <p class="exp-text" id="expText">0 / 100 EXP</p>
+                </div>
+            </div>
+            <!-------------- END OF LEVEL SECTION -------------->
+            <div class="history-container">
+                <div class="header">
+                    <h2>Recent Transactions</h2>
+                </div>
+
+
+
+            </div>
+            <!--==================================== END OF PAYMENT HISTORY ====================================-->
+        </section>
+    </main>
+    <script src="dashboard.js"></script>
+</body>
+</html>

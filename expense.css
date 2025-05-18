@@ -1,0 +1,829 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Press+Start+2P&display=swap');
+
+/* CSS VARIABLES */
+:root {
+    --color-white: #ffffff;
+    --color-light: #f0eff5;
+    --color-gray-light: 86848c;
+    --color-gray-dark: #56555e;
+    --color-dark: #27282f;
+    --color-primary: rgb(71, 7, 234);
+    --color-success: rgb(34, 202, 75);
+    --color-danger: rgb(255, 67, 54);
+    --color-warning: rgb(234, 181, 7);
+    --color-purple: rgb(160, 99, 245);
+
+    --color-primary-light: rgba(71, 7, 234, 0.2);
+    --color-success-light: rgba(34, 202, 75, 0.2);
+    --color-danger-light: rgba(255, 67, 54, 0.2);
+    --color-purple-light: rgba(160, 99, 245, 0.2);
+
+    --card-padding: 1.6rem;
+    --padding-1: 1rem;
+    --padding-2: 8px;
+
+    --card-border-radius: 1.6rem;
+    --border-radius-1: 1rem;
+    --border-radius-2: 6px;
+}
+
+.dark-theme {
+    --color-white: #131316;
+    --color-light: #23232a;
+    --color-dark: #ddd;
+    --color-gray-dark: #adacb5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    appearance: none;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+
+html {
+    font-size: 13px;
+}
+
+body {
+    background: var(--color-light);
+    font-family: 'Press Start 2P', sans-serif;
+    min-height: 100vh;
+    color: var(--color-dark);
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+h5 {
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+h6 {
+    font-size: 0.76rem;
+}
+
+p {
+    font-size: 0.86rem;
+    color: var(--color-gray-dark);
+}
+
+small {
+    font-weight: 300;
+    font-size: 0.77rem;
+}
+
+.text-muted {
+    color: var(--color-gray-dark);
+}
+
+.bg-primary {
+    color: var(--color-primary);
+    box-shadow: 0 0.8rem 0.8rem var(--color-primary-light);
+}
+
+.bg-danger {
+    color: var(--color-danger);
+    box-shadow: 0 0.8rem 0.8rem var(--color-danger-light);
+}
+
+.bg-success {
+    color: var(--color-success);
+    box-shadow: 0 0.8rem 0.8rem var(--color-success-light);
+}
+
+.bg-purple {
+    color: var(--color-purple);
+    box-shadow: 0 0.8rem 0.8rem var(--color-purple-light);
+}
+
+.bird-dark {
+    background: 27282f;
+    box-shadow: 0 0.8rem 0.8rem var(0, 0, 0 , );
+}
+
+/* ==============================  NAV BAR ==============================*/
+
+nav {
+    width: 100%;
+    background: var(--color-white);
+    padding: 1rem 0;
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 96%;
+    height: 4vh;
+    margin: 0 auto;
+}
+
+nav .container h1 {
+    background: linear-gradient(
+        to right,
+        rgb(250, 78, 10),
+        rgb(247, 12, 204),
+        rgb(0, 106, 255),
+        rgb(48, 248, 255),
+        rgb(250, 78, 10)
+    );
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradientAnimation 5s linear infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 200% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+nav .profile-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+nav .profile-area .theme-btn {
+    display: flex;
+    background: var(--color-light);
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: var(--border-radius-2);
+    cursor: pointer;
+}
+
+nav .profile-area .theme-btn span {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+nav .profile-area .theme-btn .active {
+    background: var(--color-dark);
+    border-radius: var(--border-radius-2);
+    color: var(--color-white);
+}
+
+nav .profile-area .profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+nav .profile-area button {
+    display: none;
+}
+
+/*============================== SIDEBAR STYLES ==============================*/
+
+main {
+    display: grid;
+    grid-template-columns: 16rem auto 30rem;
+    width: 96%;
+    margin: 1rem auto 4rem;
+    padding-top: 2.5rem;
+}
+main aside .sidebar h4 {
+    font-size: 0.9rem;
+}
+
+main aside .close-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 88vh;
+}
+
+
+main aside button#close-btn{
+    display: none;
+}
+
+main aside .sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    height: 4.2rem;
+    color: var(--color-gray-light);
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+main aside .sidebar a span {
+    font-size: 1.7rem;
+    margin-left: 3rem;
+    transition: all 300ms ease;
+}
+
+main aside .sidebar a.active {
+    background: var(--color-white);
+    color: var(--color-primary);
+
+}
+
+main aside .sidebar a.active:before {
+    content: '';
+    width: 6px;
+    height: 100%;
+    position: absolute;
+    background: var(--color-primary);
+}
+
+main aside .sidebar a:hover {
+    color: var(--color-primary);
+}
+
+main aside .sidebar a:hover span {
+    margin-left: 2rem;
+}
+
+/*============================== MIDDLE SECTION STYLES ==============================*/
+
+main .middle-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 85vh;
+    width: 60%;
+    padding: 0 1rem;
+}
+
+main .middle-section .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 85vh;
+    width: 100%;
+    gap: 5rem;
+    padding: 0 1rem;
+}
+
+main .middle-section .container .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -10rem 0 0 -18rem;
+}
+
+main .middle-section .container .header h1 {
+    background: linear-gradient(
+        to right,
+        rgb(250, 78, 10),
+        rgb(247, 12, 204),
+        rgb(0, 106, 255),
+        rgb(48, 248, 255),
+        rgb(250, 78, 10)
+    );
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradientAnimation 5s linear infinite;
+}
+/*============================== MIDDLE SECTION: ADD EXPENSE ==============================*/
+
+main .middle-section .container .add-expense {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 60vh;
+    width: 70%;
+    background: var(--color-white);
+    gap: 2rem;
+    border-radius: var(--card-border-radius);
+}
+
+main .middle-section .container .add-expense .expense-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 13.5rem;
+}
+
+main .middle-section .container .add-expense .expense-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 50vh;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+main .middle-section .container .add-expense .expense-content .input-fields {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2.5rem;
+    width: 100%;
+    height: 20vh;
+}
+
+main .middle-section .container .add-expense .expense-content .input-fields .description {
+    display: flex;
+    justify-content: center;
+    gap: 1.7rem;
+    width: 100%;
+    flex-direction: column;
+}
+
+main .middle-section .container .add-expense .expense-content .input-fields .description h3 {
+    margin-left: -20rem;
+}
+
+main .middle-section .container .add-expense .expense-content .input-fields .amount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    flex-direction: rows;
+}
+
+main .middle-section .container .add-expense .expense-content .input-fields .amount input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-2);
+    width: 100%;
+    height: 3vh;
+    background: var(--color-light);
+    color: var(--color-gray-dark);
+    font-size: 1rem;
+    font-family: 'Press Start 2P', sans-serif;
+    text-align: center;
+}
+
+main .middle-section .container .add-expense .expense-content .input-fields .description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.7rem;
+    width: 100%;
+    flex-direction: rows;
+}
+
+main .middle-section .container .add-expense .expense-content .input-fields .description input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-2);
+    width: 100%;
+    height: 10vh;
+    background: var(--color-light);
+    color: var(--color-gray-dark);
+    font-size: 1rem;
+    font-family: 'Press Start 2P', sans-serif;
+    text-align: center;
+}
+
+main .middle-section .container .add-expense .expense-content .expense-category {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    align-self: center;
+    gap: 2rem;
+    height: 20vh;
+}
+
+main .middle-section .container .add-expense .expense-content .expense-category .category-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 11rem;
+    width: 100%;
+}
+
+main .expense-category .category-options {
+    display: flex;
+    gap: 1rem;
+    align-self: center;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
+main .expense-category .category-options .options {
+    padding: 0.6rem var(--card-padding);
+    background: var(--color-light);
+    border-radius: var(--border-radius-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    transition: all 300ms ease;
+    height: 2.5rem;
+    width: 10.9rem;
+}
+
+main .expense-category .category-options .options:hover {
+    box-shadow: 0 0 1.5rem var(--color-primary-light);
+    cursor: pointer;
+}
+
+main .expense-category .category-options .options div {
+    display: flex;
+    gap: 2rem;
+    align-self: center;
+}
+
+
+main .middle-section .container .add-expense .expense-content button {
+    text-align: center;
+    background: var(--color-primary);
+    border-radius: var(--border-radius-2);
+    color: var(--color-white);
+    font-size: 1.2rem;
+    font-family: 'Press Start 2P', sans-serif;
+    width: 60%;
+    height: 4vh;
+    margin-top: 1rem;
+}
+
+/*============================== RIGHT SECTION STYLES ==============================*/
+
+main .right-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 85vh;
+    margin-left: -35rem;
+    width: 215%;
+    gap: 5rem;
+    padding: 0 1rem;
+}
+
+main .right-section .container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 64vh;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+/*============================== LEVEL STYLES ==============================*/
+
+main section.right-section .container .level-container {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    height: 10rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+main section.right-section .container .level-container .level-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--card-padding);
+    padding-bottom: 0;
+}
+
+main section.right-section .container .level-container .level-header img {
+    width: 3rem;
+    height: 3rem;
+}
+
+main section.right-section .container .level-container .progress-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: var(--card-padding);
+}
+
+main section.right-section .container .level-container .progress-bar-container img {
+    width: 3rem;
+    height: 4rem;
+    margin-right: 1.5rem;
+    padding-bottom: 0.8rem;
+}
+
+main section.right-section .container .level-container .streak-info h1 {
+    font-family: 'Press Start 2P', cursive;
+}
+
+main section.right-section .container .level-container .progress-bar-container {
+    width: 100%;
+    padding: 0 1.5rem;
+    margin-top: 1rem;
+}
+
+main section.right-section .container .level-container .progress-bar {
+    width: 100%;
+    height: 18px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+main section.right-section .container .level-container .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--color-success), var(--color-primary));
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/*============================== LOWER-SECTION STYLES ==============================*/
+
+main section.right-section .container .lower-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+    gap: 1rem;
+}
+
+
+/*============================== BAR GRAPH STYLES ==============================*/
+
+canvas#line-chart {
+    background: var(--color-white);
+    max-width: 40%;
+    border-radius: var(--card-border-radius);
+    padding: var(card-padding);
+    height: 40vh;
+}
+
+/*============================== RECENT EXPENSES STYLES ==============================*/
+
+main section.right-section .container .recent-expenses {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    height: 40vh;
+    width: 60%;
+    padding: var(--card-padding);
+}
+
+main section.right-section .container .recent-expenses .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+
+main section.right-section .container .recent-expenses .history-container .history h2 {
+    font-size: 1.2rem;
+}
+
+main section.right-section .container .recent-expenses .history-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 30vh;
+    overflow-y: auto;
+}
+
+main section.right-section .container .recent-expenses .history-container .history-info {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 0.3rem;
+    gap: 5rem;
+}
+
+main section.right-section .container .recent-expenses .history-container .history {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+/* Active state for category options */
+main .expense-category .category-options .options.active {
+    background: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: 0 0 1.5rem var(--color-primary-light);
+}
+
+/* Payment Method Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--color-white);
+    padding: 2rem;
+    border-radius: var(--card-border-radius);
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.payment-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--color-light);
+    border-radius: var(--border-radius-2);
+    border: none;
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.payment-btn:hover {
+    background: var(--color-primary-light);
+}
+
+.payment-btn img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: var(--border-radius-2);
+}
+
+.cancel-btn {
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--color-danger);
+    color: var(--color-white);
+    border-radius: var(--border-radius-2);
+    border: none;
+    cursor: pointer;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 0.8rem;
+}
+
+/* History details styles */
+.history-details details {
+    cursor: pointer;
+}
+
+.history-details summary {
+    font-size: 0.8rem;
+    color: var(--color-gray-dark);
+    outline: none;
+}
+
+.history-details h5 {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--color-light);
+    border-radius: var(--border-radius-2);
+}
+
+/* Delete Button Styles */
+.delete-expense-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-danger);
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: auto;
+    transition: all 0.3s ease;
+}
+
+.delete-expense-btn:hover {
+    transform: scale(1.1);
+    color: var(--color-danger-light);
+}
+
+/* History Item Layout Adjustments */
+.history {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--color-light);
+    transition: all 0.3s ease;
+}
+
+.history:hover {
+    background: var(--color-light);
+}
+
+/* Ensure canvas container is properly sized */
+.lower-section {
+    display: flex;
+    gap: 1rem;
+    height: 40vh;
+}
+
+#line-chart {
+    width: 100% !important; /* Force full width */
+    height: 100% !important; /* Force full height */
+    max-height: 300px; /* Set a reasonable max height */
+    aspect-ratio: 1; /* Maintain square ratio */
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: 1rem;
+}
+
+.lower-section {
+    display: flex;
+    gap: 1rem;
+    height: auto; /* Remove fixed height */
+    flex-wrap: wrap; /* Allow items to wrap on small screens */
+}
+
+.recent-expenses {
+    flex: 1; /* Allow it to grow */
+    min-width: 300px; /* Prevent becoming too narrow */
+}
+
+/* Level Up Notification Styles */
+.level-up-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--color-success);
+    color: white;
+    padding: 2rem;
+    border-radius: var(--card-border-radius);
+    z-index: 1000;
+    animation: popIn 0.5s ease-out;
+}
+
+.level-up-content {
+    text-align: center;
+}
+
+.level-up-notification.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes popIn {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Progress Bar Styles */
+.progress-bar {
+    width: 100%;
+    height: 18px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--color-success), var(--color-primary));
+    width: 0%;
+    transition: width 0.5s ease;
+}

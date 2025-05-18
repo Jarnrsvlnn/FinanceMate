@@ -1,0 +1,742 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Press+Start+2P&display=swap');
+
+/* CSS VARIABLES */
+:root {
+    --color-white: #ffffff;
+    --color-light: #f0eff5;
+    --color-gray-light: 86848c;
+    --color-gray-dark: #56555e;
+    --color-dark: #27282f;
+    --color-primary: rgb(71, 7, 234);
+    --color-success: rgb(34, 202, 75);
+    --color-danger: rgb(255, 67, 54);
+    --color-warning: rgb(234, 181, 7);
+    --color-purple: rgb(160, 99, 245);
+
+    --color-primary-light: rgba(71, 7, 234, 0.2);
+    --color-success-light: rgba(34, 202, 75, 0.2);
+    --color-danger-light: rgba(255, 67, 54, 0.2);
+    --color-purple-light: rgba(160, 99, 245, 0.2);
+
+    --card-padding: 1.6rem;
+    --padding-1: 1rem;
+    --padding-2: 8px;
+
+    --card-border-radius: 1.6rem;
+    --border-radius-1: 1rem;
+    --border-radius-2: 6px;
+}
+
+.dark-theme {
+    --color-white: #131316;
+    --color-light: #23232a;
+    --color-dark: #ddd;
+    --color-gray-dark: #adacb5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    appearance: none;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+
+html {
+    font-size: 13px;
+}
+
+body {
+    background: var(--color-light);
+    font-family: 'Press Start 2P', sans-serif;
+    min-height: 100vh;
+    color: var(--color-dark);
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+h5 {
+    font-size: 0.86rem;
+    font-weight: 500;
+}
+
+h6 {
+    font-size: 0.76rem;
+}
+
+p {
+    font-size: 0.86rem;
+    color: var(--color-gray-dark);
+}
+
+small {
+    font-weight: 300;
+    font-size: 0.77rem;
+}
+
+.text-muted {
+    color: var(--color-gray-dark);
+}
+
+.bg-primary {
+    color: var(--color-primary);
+    box-shadow: 0 0.8rem 0.8rem var(--color-primary-light);
+}
+
+.bg-danger {
+    color: var(--color-danger);
+    box-shadow: 0 0.8rem 0.8rem var(--color-danger-light);
+}
+
+.bg-success {
+    color: var(--color-success);
+    box-shadow: 0 0.8rem 0.8rem var(--color-success-light);
+}
+
+.bg-purple {
+    color: var(--color-purple);
+    box-shadow: 0 0.8rem 0.8rem var(--color-purple-light);
+}
+
+.bird-dark {
+    background: 27282f;
+    box-shadow: 0 0.8rem 0.8rem var(0, 0, 0 , );
+}
+
+/* ==============================  NAV BAR ==============================*/
+
+nav {
+    width: 100%;
+    background: var(--color-white);
+    padding: 1rem 0;
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 96%;
+    height: 4vh;
+    margin: 0 auto;
+}
+
+nav .container h1 {
+    background: linear-gradient(
+        to right,
+        rgb(250, 78, 10),
+        rgb(247, 12, 204),
+        rgb(0, 106, 255),
+        rgb(48, 248, 255),
+        rgb(250, 78, 10)
+    );
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradientAnimation 5s linear infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 200% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+nav .profile-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+nav .profile-area .theme-btn {
+    display: flex;
+    background: var(--color-light);
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: var(--border-radius-2);
+    cursor: pointer;
+}
+
+nav .profile-area .theme-btn span {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+nav .profile-area .theme-btn .active {
+    background: var(--color-dark);
+    border-radius: var(--border-radius-2);
+    color: var(--color-white);
+}
+
+nav .profile-area .profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+nav .profile-area button {
+    display: none;
+}
+
+/*============================== SIDEBAR STYLES ==============================*/
+
+main {
+    display: grid;
+    grid-template-columns: 16rem auto 30rem;
+    gap: 2rem;   ;
+    width: 96%;
+    margin: 1rem auto 4rem;
+    padding-top: 2.5rem;
+}
+main aside .sidebar h4 {
+    font-size: 0.9rem;
+}
+
+main aside .close-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 88vh;
+}
+
+
+main aside button#close-btn{
+    display: none;
+}
+
+main aside .sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    height: 4.2rem;
+    color: var(--color-gray-light);
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+main aside .sidebar a span {
+    font-size: 1.7rem;
+    margin-left: 3rem;
+    transition: all 300ms ease;
+}
+
+main aside .sidebar a.active {
+    background: var(--color-white);
+    color: var(--color-primary);
+
+}
+
+main aside .sidebar a.active:before {
+    content: '';
+    width: 6px;
+    height: 100%;
+    position: absolute;
+    background: var(--color-primary);
+}
+
+main aside .sidebar a:hover {
+    color: var(--color-primary);
+}
+
+main aside .sidebar a:hover span {
+    margin-left: 2rem;
+}
+
+/* ==============================  MIDDLE SECTION: CARD STYLES ==============================*/
+
+main section.middle-section .header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+main section.middle-section .header input[type="date"] {
+    padding: 0.5rem 2rem;
+    border-radius: var(--border-radius-2);
+    background: var(--color-white);
+    color: var(--color-gray-dark);
+}
+
+main section.middle-section .cards-container {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+main section.middle-section .cards-container .card {
+    background: linear-gradient(#ff796f, #bd261b);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    color: white;
+    height: 16rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2rem 3rem var(--color-danger-light);
+    transition: all 300ms ease;
+    min-width: 22rem;
+}
+
+main section.middle-section .cards-container .card:nth-child(2) {
+    background: linear-gradient(#7f8191, #27282f);
+    box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.2);
+}
+
+main section.middle-section .cards-container .card:nth-child(3) {
+    background: linear-gradient(#5d70ff, #5719c2);
+    box-shadow: 0 2rem 3rem var(--color-primary-light);
+}
+
+main section.middle-section .cards-container .card:hover {
+    box-shadow: none;
+}
+
+main section.middle-section .card .top {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+main section.middle-section .card .top h2 {
+    margin-top: 1.5rem;
+    margin-left: -2rem;
+}
+
+main section.middle-section .card:nth-child(1) .top img {
+    margin-left: -2.5rem;
+}
+main section.middle-section .card:nth-child(2) .top img {
+    margin-left: -1rem;
+    margin-right: 1rem;
+}
+
+main section.middle-section .card:nth-child(3) .top img {
+    margin-left: -1.5rem;
+    margin-right: 1rem;
+}
+
+main section.middle-section .card .top .left {
+    display: flex;
+    gap: 0.5rem;
+}
+
+main section.middle-section .card .top .left h2 {
+    font-size: 1.4rem;
+    font-weight: 200;
+}
+
+main section.middle-section .card .top .left img {
+    width: 7rem;
+    height: 4rem;
+    padding: 0.4rem;
+}
+
+main section.middle-section .card .top .right img {
+    width: 3rem;
+}
+
+main section.middle-section .card .middle {
+    display: flex;
+    justify-content: space-between;
+}
+
+main section.middle-section .card .middle .chip {
+    width: 3.5rem;
+}
+
+main section.middle-section .card .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+main section.middle-section .card .bottom .right {
+    display: flex;
+    gap: 2rem;
+}
+/*============================== MIDDLE SECTION: MONTHLY REPORT ==============================*/
+main .transaction-header {
+    margin-top: 1.5rem;
+}
+main .monthly-report {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10rem;
+    justify-content: space-between;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+}
+
+main .monthly-report .report {
+    background: var(--color-white);
+    padding: var(--card-padding);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    box-shadow: 0 2rem 3rem var(--color-primary-light);
+    transition: all 300ms ease;
+}
+
+main .monthly-report .report:hover {
+    box-shadow: none;
+}
+
+main .monthly-report h3 {
+    padding-bottom: 0.8rem;
+}
+
+main .monthly-report details {
+    padding-bottom: 0.3rem;
+}
+main .monthly-report h1{
+    padding: 1rem 0 1rem 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+main .monthly-report h6{
+    padding: 0 0 1rem 0;
+    font-size: 0.9rem;
+}
+
+
+/*============================== MIDDLE SECTION: RECENT PAYMENT ==============================*/
+
+main .recent-payment .badge-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    max-width: 100%;
+    padding: 0.5rem 0;
+    border: red 1px solid var(--color-light);
+    overflow-x: auto;
+}
+
+main .recent-payment .badge {
+    padding: 0.8rem 1.2rem;
+    background: var(--color-white);
+    display: flex;
+    align-items: center;
+    border-radius: var(--border-radius-1);
+    gap: 1.2rem;
+    transition: all 300ms ease;
+    height: 3.5rem; /* Increased height */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+main .recent-payment .badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2rem 3rem var(--color-danger-light);
+}
+
+main .recent-payment .badge span {
+    width: 16px; /* Increased dot size */
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+main .recent-payment .badge div {
+    display: flex;
+    flex-direction: row;
+    gap: 0.3rem;
+    overflow: hidden;
+}
+
+main .recent-payment .badge h5 {
+    font-size: 0.7rem;
+    color: var(--color-gray-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+main .recent-payment .badge h4 {
+    font-size: 0.7rem;
+    color: var(--color-dark);
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*============================== MIDDLE SECTION: LINE GRAPH ==============================*/
+
+canvas#line-chart {
+    background: var(--color-white);
+    max-width: 100%;
+    margin-top: 2rem;
+    border-radius: var(--card-border-radius);
+    padding: var(card-padding);
+    height: 27rem;
+}
+
+
+/*============================== RIGHT SECTION: LEVEL SECTION ==============================*/
+
+main section.right-section {
+    margin-top: 3.2rem;
+}
+
+main section.right-section .level-container {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    height: 10rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+main section.right-section .level-container .level-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--card-padding);
+    padding-bottom: 0;
+}
+
+main section.right-section .level-container .level-header img {
+    width: 3rem;
+    height: 3rem;
+}
+
+main section.right-section .level-container .progress-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: var(--card-padding);
+}
+
+main section.right-section .level-container .progress-bar-container img {
+    width: 3rem;
+    height: 4rem;
+    margin-right: 1.5rem;
+    padding-bottom: 0.8rem;
+}
+
+main section.right-section .level-container .streak-info h1 {
+    font-family: 'Press Start 2P', cursive;
+}
+
+main section.right-section .level-container .progress-bar-container {
+    width: 100%;
+    padding: 0 1.5rem;
+    margin-top: 1rem;
+}
+
+main section.right-section .level-container .progress-bar {
+    width: 100%;
+    height: 18px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+main section.right-section .level-container .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--color-success), var(--color-primary));
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/*============================== RIGHT SECTION: RECENT TRANSACTIONS/HISTORY ==============================*/
+main section.right-section .history-container {
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+}
+
+main section.right-section .history-container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--card-padding);
+    padding-bottom: 0;
+}
+
+main section.right-section .history-container .header h2 {
+    font-size: 1.2rem;
+    font-weight: 1000;
+}
+
+main section.right-section .history-container .history h4{
+    font-size: 0.8rem;
+}
+
+main section.right-section .history-container .history {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--card-padding);
+    border-bottom: 1px solid var(--color-light);
+    transition: all 200ms ease;
+}
+
+main section.right-section .history-container .history:last-child {
+    border: none;
+}
+
+main section.right-section .history-container .history:hover {
+    background: var(--color-light);
+    cursor: pointer;
+}
+
+/*============================== MEDIA QUERIES : TABLETS ==============================*/
+@media screen and (max-width: 1024px) {
+    nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    }
+
+    main section.middle-section .cards-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    main canvas {
+        margin: 3rem 0 1rem;
+    }
+
+    main section.right-section .level-container {
+        margin-top: 3rem;
+    }
+}
+
+/*============================== MEDIA QUERIES : MOBILE PHONES ==============================*/
+
+@media screen and (max-width: 600px) {
+    nav .profile-area {
+        gap: 2.6rem;
+    }
+
+    main section.middle-section .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    nav section.middle-section .fast-payment {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 3rem;
+        gap: 1.5rem;
+    }
+}
+
+/* Add to your existing CSS */
+.text-success {
+    color: var(--color-success);
+}
+
+.text-danger {
+    color: var(--color-danger);
+}
+
+.badge span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.badge h4 {
+    color: var(--color-dark);
+    font-size: 0.9rem;
+}
+
+.badge h5 {
+    color: var(--color-gray-dark);
+    font-size: 0.8rem;
+}
+
+/* Chart container styling */
+.chart-container {
+    margin-top: 2rem;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: 1rem;
+    position: relative;
+}
+
+.chart-container h3 {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1rem;
+    color: var(--color-dark);
+}

@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     submitButton.addEventListener('click', function(e) {
         e.preventDefault();
 
-        // ... (existing validation code)
+        
         if (!sourceInput.value.trim() || !amountInput.value.trim()) {
             alert('Please fill in both fields');
             return;
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Create transaction object
+        
         const transaction = {
             id: Date.now().toString(),
             source: sourceInput.value.trim(),
@@ -101,11 +101,11 @@ document.addEventListener('DOMContentLoaded', function() {
         budgetData.totalIncome = currentTotalIncome;
         sessionStorage.setItem('budgetData', JSON.stringify(budgetData));
 
-        // Clear inputs
+        
         sourceInput.value = '';
         amountInput.value = '';
 
-        // Update Level
+        
         updateLevel();
     });
 
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         transactions.unshift(transaction);
         sessionStorage.setItem('incomeTransactions', JSON.stringify(transactions));
 
-        // Trigger storage event manually for same-tab updates
+        // Trigger storage event to update other tabs
         window.dispatchEvent(new Event('storage'));
     }
 
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
             addTransactionToDOM(transaction);
         });
 
-        // Initialize level display
+        
         updateLevelDisplay();
     }
 

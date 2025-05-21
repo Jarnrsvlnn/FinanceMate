@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceMate Dashboard</title>
+    <link rel="stylesheet" href="profile.css">
+
+    <!--==================================== SYMBOLS/ICONS/FONTS ====================================-->
+    <script src="https://kit.fontawesome.com/4f0795385b.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1>FINANCEMATE</h1>
+            <div class="profile-area">
+                <div class="theme-btn">
+                    <span class="material-symbols-outlined active">light_mode</span>
+                    <span class="material-symbols-outlined">dark_mode</span>
+                </div>
+                <button id="menu-btn">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!--==================================== END OF NAVIGATION BAR ====================================-->
+
+    <main>
+        <aside>
+            <button id="close-btn">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+
+            <div class="sidebar">
+                <a href="dashboard.html" class="active" onclick="location.reload()">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <h4>DASHBOARD</h4>
+                </a>
+                <a href="expense.html">
+                    <span class="material-symbols-outlined">payments</span>
+                    <h4>EXPENSES</h4>
+                </a>
+                <a href="budget.html">
+                    <span class="material-symbols-outlined">attach_money</span>
+                    <h4>BUDGET</h4>
+                </a>
+                <a href="income.html">
+                    <span class="material-symbols-outlined">money_bag</span>
+                    <h4>INCOME</h4>
+                </a>
+                <div class="profile-container">
+                    <a href="profile.html" class="profile-btn"></a> 
+                    <h4>PROFILE</h4>
+                </div>
+            </div>
+        </aside>
+
+        <!---------------- END OF ASIDE SECTION --------------->
+
+        <section class="middle-section">
+            <div class="container">
+                <div class="profile-header">
+                    <h1>PROFILE</h1>
+                </div>
+                <div class="profile-container">
+                    <div class="upper-container">
+                        <div class="background-image">
+                        </div>
+                        <div class="profile-image">
+                            <img src="img/profile.png" alt="Profile Image">
+                        </div>
+                        <div class="profile-name">
+                            <h1>John Doe</h1>
+                        </div>
+                    </div>
+                    <div class="lower-container">
+                        <div class="bio">
+                            <h2>BIO</h2>
+                            <input type="text" id="bio" placeholder="Enter your bio here...">
+                        </div>
+                        <div class="logout-switch">
+                            <button class="option" id="logout-btn">LOGOUT</button>
+                            <button class="option" id="switch-btn">SWITCH ACCOUNT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+<script src="profile.js"></script>
+</html>

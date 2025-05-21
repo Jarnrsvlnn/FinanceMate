@@ -178,7 +178,7 @@ body {
     outline: 1px solid rgb(255, 255, 255);
 }
 
-.sign-in_button button{
+.sign-up_button button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -201,8 +201,7 @@ body {
     transform: scale(0.95);
 }
 
-
-.outer-container .inner-container .sign-up_button {
+.outer-container .inner-container .sign-in_button {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -210,6 +209,6 @@ body {
     padding-top: 3rem;
 }
 
-.outer-container .inner-container .sign-up_button a {
+.outer-container .inner-container .sign-in_button a {
     color: blue;
 }

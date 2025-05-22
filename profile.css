@@ -213,6 +213,11 @@ main {
     margin: 1rem auto 4rem;
     padding-top: 2.5rem;
 }
+
+main aside {
+    border-right: black 1px solid;
+}
+
 main aside .sidebar h4 {
     font-size: 0.9rem;
 }
@@ -244,9 +249,9 @@ main aside .sidebar a.profile-btn {
     margin-top: 40rem;
     margin-left: 3rem;
     width: 8rem;
+    background-image: url('img/defaultProfile.jpg');
     height: 8rem;
     border-radius: 50%;
-    background-image: url('img/profile.png');
     background-size: cover;
     background-position: center;
     border: var(--color-dark) 3px solid;
@@ -291,12 +296,29 @@ main aside .sidebar a:hover span {
 
 /* ==============================  MIDDLE SECTION: PROFILE STYLES - UPPER ==============================*/
 
+main .middle-section .container .profile-header h1 {
+        background: linear-gradient(
+        to right,
+        rgb(250, 78, 10),
+        rgb(247, 12, 204),
+        rgb(0, 106, 255),
+        rgb(48, 248, 255),
+        rgb(250, 78, 10)
+    );
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradientAnimation 5s linear infinite;
+    margin-left: 2rem;
+    font-size: 3rem;
+}
+
 main .middle-section .container .profile-container {
     display: flex;
     align-items: center;
     background: var(--color-white);
     border-radius: var(--border-radius-1);
-    height: 70vh;
+    height: 52vh;
     width: 60%;
     flex-direction: column;
     gap: 2rem;
@@ -305,9 +327,9 @@ main .middle-section .container .profile-container {
 }
 
 main .middle-section .container .profile-container .background-image {
-    width: 368%;
+    width: 196%;
     height: 20rem;
-    margin-left: -23.6rem;
+    margin-left: -16rem;
     background: rgb(42, 168, 42);
     border-radius: var(--border-radius-1);
 }
@@ -324,6 +346,7 @@ main .middle-section .container .profile-container .profile-image img {
 
 main .middle-section .container .profile-container .profile-name {
     margin-top: 2rem;
+    margin-left: 7rem;
 }
 
 /* ==============================  MIDDLE SECTION: PROFILE STYLES - LOWER ==============================*/
@@ -392,4 +415,593 @@ main .middle-section .container .profile-container .lower-container .logout-swit
 
 main .middle-section .container .profile-container .lower-container .logout-switch #switch-btn:hover {
     box-shadow: 0 0.8rem 0.8rem var(--color-success-light);
+}
+
+
+/* ============================== MEDIA QUERIES: DESKTOPS ==============================*/
+
+@media (max-width: 1950px) {    
+
+    main .middle-section .container .profile-container .background-image {
+        width: 132.5%;
+        height: 20rem;
+        margin-left: -7rem;
+        background: rgb(42, 168, 42);
+        border-radius: var(--border-radius-1);
+    }
+
+    main .middle-section .container .profile-container .profile-image img {
+        position: absolute;
+        left: 53rem;
+        top: 25rem;
+        width: 20rem;
+        height: 20rem;
+        border-radius: 50%;
+        border: var(--color-dark) 3px solid;
+    }
+
+    main .middle-section .container .profile-container .profile-name {
+        margin-top: 2rem;
+        margin-left: 16rem;
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #logout-btn {
+        background: red;
+        margin-left: -10rem;
+        color: var(--color-white);
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #switch-btn {
+        background: var(--color-success);
+        margin-left: 1rem;
+        color: var(--color-white);
+    }
+}
+
+@media (max-width: 1695px) {    
+
+    main .middle-section .container .profile-container {
+        display: flex;
+        align-items: center;
+        background: var(--color-white);
+        border-radius: var(--border-radius-1);
+        height: 52vh;
+        width: 80%;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 5rem;
+        margin-left: 20rem; 
+    }
+
+    main .middle-section .container .profile-container .background-image {
+        width: 150%;
+        height: 20rem;
+        margin-left: -10rem;
+        background: rgb(42, 168, 42);
+        border-radius: var(--border-radius-1);
+    }
+
+    main .middle-section .container .profile-container .profile-image img {
+        position: absolute;
+        left: 45rem;
+        top: 25rem;
+        width: 17rem;
+        height: 17rem;
+        border-radius: 50%;
+        border: var(--color-dark) 3px solid;
+    }
+
+    main .middle-section .container .profile-container .profile-name h1{
+        margin-top: 2rem;
+        font-size: 2rem;
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #logout-btn {
+        background: red;
+        color: var(--color-white);
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #switch-btn {
+        background: var(--color-success);
+        margin-left: 3.5rem;
+        color: var(--color-white);
+    }
+}
+
+@media (max-width: 1400px) {    
+
+    main .middle-section .container .profile-container {
+        display: flex;
+        align-items: center;
+        background: var(--color-white);
+        border-radius: var(--border-radius-1);
+        height: 52vh;
+        width: 90%;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 5rem;
+        margin-left: 15rem; 
+    }
+
+    main .middle-section .container .profile-container .background-image {
+        width: 133%;
+        height: 20rem;
+        margin-left: -6.5rem;
+        background: rgb(42, 168, 42);
+        border-radius: var(--border-radius-1);
+    }
+
+    main .middle-section .container .profile-container .profile-image img {
+        position: absolute;
+        left: 38rem;
+        top: 25rem;
+        width: 17rem;
+        height: 17rem;
+        border-radius: 50%;
+        border: var(--color-dark) 3px solid;
+    }
+
+    main .middle-section .container .profile-container .profile-name h1{
+        margin-top: 2rem;
+        font-size: 2rem;
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #logout-btn {
+        background: red;
+        color: var(--color-white);
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #switch-btn {
+        background: var(--color-success);
+        margin-left: 3.5rem;
+        color: var(--color-white);
+    }
+}
+
+@media (max-width: 1120px) {    
+
+    main .middle-section .container .profile-container {
+        display: flex;
+        align-items: center;
+        background: var(--color-white);
+        border-radius: var(--border-radius-1);
+        height: 60vh;
+        width: 106%;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 5rem;
+        margin-left: 7rem; 
+    }
+
+    main .middle-section .container .profile-container .background-image {
+        width: 128.5%;
+        height: 20rem;
+        margin-left: -5.5rem;
+        background: rgb(42, 168, 42);
+        border-radius: var(--border-radius-1);
+    }
+
+    main .middle-section .container .profile-container .profile-image img {
+        position: absolute;
+        left: 30rem;
+        top: 25rem;
+        width: 17rem;
+        height: 17rem;
+        border-radius: 50%;
+        border: var(--color-dark) 3px solid;
+    }
+
+    main .middle-section .container .profile-container .profile-name h1{
+        margin-top: 2rem;
+        font-size: 2rem;
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #logout-btn {
+        background: red;
+        margin-top: 12rem;
+        color: var(--color-white);
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #switch-btn {
+        background: var(--color-success);
+        margin-top: 12rem;
+        margin-left: 1rem;
+        color: var(--color-white);
+    }
+}
+
+@media (max-width: 960px) {    
+
+    main .middle-section .container .profile-container {
+        display: flex;
+        align-items: center;
+        background: var(--color-white);
+        border-radius: var(--border-radius-1);
+        height: 60vh;
+        width: 110  %;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 5rem;
+        margin-left: 2rem; 
+    }
+
+    main .middle-section .container .profile-container .background-image {
+        width: 112%;
+        height: 20rem;
+        margin-left: -2.5rem;
+        background: rgb(42, 168, 42);
+        border-radius: var(--border-radius-1);
+    }
+
+    main .middle-section .container .profile-container .profile-image img {
+        position: absolute;
+        left: 25rem;
+        top: 25rem;
+        width: 17rem;
+        height: 17rem;
+        border-radius: 50%;
+        border: var(--color-dark) 3px solid;
+    }
+
+    main .middle-section .container .profile-container .profile-name h1{
+        margin-top: 2rem;
+        font-size: 2rem;
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #logout-btn {
+        background: red;
+        margin-top: 12rem;
+        margin-left: -15rem;
+        color: var(--color-white);
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #switch-btn {
+        background: var(--color-success);
+        margin-top: 12rem;
+        margin-left: 1rem;
+        color: var(--color-white);
+    }
+}
+
+@media (max-width: 750px) {   
+        nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    } 
+
+    main .middle-section .container .profile-header h1 {
+        font-size: 5rem;
+        margin-left: 4rem;
+    }
+    main .middle-section .container .profile-container {
+        display: flex;
+        align-items: center;
+        background: var(--color-white);
+        border-radius: var(--border-radius-1);
+        height: 60vh;
+        width: 110%;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 5rem;
+        margin-left: -1rem; 
+    }
+
+    main .middle-section .container .profile-container .background-image {
+        width: 115%;
+        height: 20rem;
+        margin-left: -3.5rem;
+        background: rgb(42, 168, 42);
+        border-radius: var(--border-radius-1);
+    }
+
+    main .middle-section .container .profile-container .profile-image img {
+        position: absolute;
+        left: 10rem;
+        top: 30rem;
+        width: 17rem;
+        height: 17rem;
+        border-radius: 50%;
+        border: var(--color-dark) 3px solid;
+    }
+
+    main .middle-section .container .profile-container .profile-name h1{
+        margin-top: 2rem;
+        margin-left: 1rem;
+        font-size: 2rem;
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #logout-btn {
+        background: red;
+        margin-top: 12rem;
+        margin-left: -15rem;
+        color: var(--color-white);
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #switch-btn {
+        background: var(--color-success);
+        margin-top: 12rem;
+        margin-left: 1rem;
+        color: var(--color-white);
+    }
+}
+
+@media (max-width: 680px) {   
+        nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    } 
+
+    main .middle-section .container .profile-header h1 {
+        font-size: 5rem;
+        margin-left: 4rem;
+    }
+    main .middle-section .container .profile-container {
+        display: flex;
+        align-items: center;
+        background: var(--color-white);
+        border-radius: var(--border-radius-1);
+        height: 60vh;
+        width: 90%;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 5rem;
+        margin-left: 2.5rem; 
+    }
+
+    main .middle-section .container .profile-container .background-image {
+        width: 100%;
+        height: 20rem;
+        margin-left: 0.1rem;
+        background: rgb(42, 168, 42);
+        border-radius: var(--border-radius-1);
+    }
+
+    main .middle-section .container .profile-container .profile-image img {
+        position: absolute;
+        left: 5rem;
+        top: 30rem;
+        width: 15rem;
+        height: 15rem;
+        border-radius: 50%;
+        border: var(--color-dark) 3px solid;
+    }
+
+    main .middle-section .container .profile-container .profile-name h1{
+        margin-top: 2rem;
+        margin-left: -2rem;
+        font-size: 1.7rem;
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #logout-btn {
+        background: red;
+        margin-top: 12rem;
+        margin-left: -33rem;
+        width: 80%;
+        color: var(--color-white);
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #switch-btn {
+        background: var(--color-success);
+        margin-top: 12rem;
+        margin-left: 1rem;
+        width: 80%;
+        color: var(--color-white);
+    }
+}
+
+@media (max-width: 480px) {   
+        nav .profile-area {
+        gap: 2rem;
+    }
+
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 300ms ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    main aside .sidebar {
+        margin-top: 4rem;
+    } 
+
+    main .middle-section .container .profile-header h1 {
+        font-size: 4.6rem;
+        margin-left: 3rem;
+    }
+    main .middle-section .container .profile-container {
+        display: flex;
+        align-items: center;
+        background: var(--color-white);
+        border-radius: var(--border-radius-1);
+        height: 60vh;
+        width: 90%;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 5rem;
+        margin-left: 2rem; 
+    }
+
+    main .middle-section .container .profile-container .background-image {
+        width: 100%;
+        height: 20rem;
+        margin-left: 0.1rem;
+        background: rgb(42, 168, 42);
+        border-radius: var(--border-radius-1);
+    }
+
+    main .middle-section .container .profile-container .profile-image img {
+        position: absolute;
+        left: 10rem;
+        top: 30rem;
+        width: 15rem;
+        height: 15rem;
+        border-radius: 50%;
+        border: var(--color-dark) 3px solid;
+    }
+
+    main .middle-section .container .profile-container .profile-name h1{
+        margin-top: 10rem;
+        margin-left: -15rem;
+        font-size: 2rem;
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #logout-btn {
+        background: red;
+        margin-top: -2rem;
+        margin-left: -33rem;
+        width: 80%;
+        color: var(--color-white);
+    }
+
+    main .middle-section .container .profile-container .lower-container .logout-switch #switch-btn {
+        background: var(--color-success);
+        margin-top: var(--padding-2);
+        margin-left: 1rem;
+        width: 80%;
+        color: var(--color-white);
+    }
 }

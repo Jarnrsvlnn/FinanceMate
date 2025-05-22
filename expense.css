@@ -212,6 +212,11 @@ main {
     margin: 1rem auto 4rem;
     padding-top: 2.5rem;
 }
+
+main aside {
+    border-right: black 1px solid;
+}
+
 main aside .sidebar h4 {
     font-size: 0.9rem;
 }
@@ -273,7 +278,7 @@ main aside .sidebar a.profile-btn {
     width: 8rem;
     height: 8rem;
     border-radius: 50%;
-    background-image: url('img/profile.png');
+    background-image: url('img/defaultProfile.jpg');
     background-size: cover;
     background-position: center;
     border: var(--color-dark) 3px solid;

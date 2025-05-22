@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeBtn = document.querySelector('.theme-btn');
     const dateInput = document.querySelector('input[type="date"]');
     const pieChartCanvas = document.getElementById('line-chart');
-
+    
     // ========== Initialize ==========
     // Load Chart.js first if needed
     loadChartJsIfNeeded(function() {
@@ -15,13 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeTheme();
         setupStorageListener();
         displayUsername();
+        initializeDatePicker();
     });
-
-
+    
     // ========== Event Listeners ==========
     if (menuBtn) menuBtn.onclick = () => sidebar.style.display = 'block';
     if (closeBtn) closeBtn.onclick = () => sidebar.style.display = 'none';
-
+    
     if (themeBtn) {
         themeBtn.onclick = function() {
             document.body.classList.toggle('dark-theme');
@@ -31,14 +31,53 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('darkTheme', document.body.classList.contains('dark-theme'));
         };
     }
-
+    
     if (dateInput) {
-        dateInput.valueAsDate = new Date();
-        dateInput.addEventListener('change', updateDashboardData);
+        // Initialize with current date if no date is stored
+        const storedDate = localStorage.getItem('selectedDate');
+        if (storedDate) {
+            dateInput.value = storedDate;
+        } else {
+            dateInput.valueAsDate = new Date();
+            localStorage.setItem('selectedDate', dateInput.value);
+        }
+        
+        // Save selected date when changed
+        dateInput.addEventListener('change', function() {
+            localStorage.setItem('selectedDate', this.value);
+            updateDashboardData();
+        });
     }
-
+    
+    // ========== Date Picker Functions ==========
+    function initializeDatePicker() {
+        const dateInput = document.querySelector('input[type="date"]');
+        if (dateInput) {
+            // Load saved date or use current date
+            const storedDate = localStorage.getItem('selectedDate');
+            if (storedDate) {
+                dateInput.value = storedDate;
+            } else {
+                dateInput.valueAsDate = new Date();
+                localStorage.setItem('selectedDate', dateInput.value);
+            }
+        }
+    }
+    
+    function getSelectedDate() {
+        const storedDate = localStorage.getItem('selectedDate');
+        if (storedDate) {
+            return new Date(storedDate);
+        }
+        return new Date(); // Default to current date
+    }
+    
+    function formatDateForDisplay(date) {
+        return date.toLocaleDateString();
+    }
+    
     // ========== Core Functions ==========
-
+    
     // Load Chart.js library if it's not already loaded
     function loadChartJsIfNeeded(callback) {
         if (typeof Chart === 'undefined') {
@@ -60,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
             callback();
         }
     }
-
+    
     // Debounce function to limit how often a function is called
     function debounce(func, wait) {
         let timeout;
@@ -70,88 +109,88 @@ document.addEventListener('DOMContentLoaded', function() {
             timeout = setTimeout(() => func.apply(context, args), wait);
         };
     }
-
+    
     // Main function to update all dashboard data
     function updateDashboardData() {
         // Load data from storage
-        const budgetData = JSON.parse(sessionStorage.getItem('budgetData')) || {};
-        const incomeTransactions = JSON.parse(sessionStorage.getItem('incomeTransactions')) || [];
-        const expenses = JSON.parse(sessionStorage.getItem('expenses')) || [];
-
+        const budgetData = JSON.parse(localStorage.getItem('budgetData')) || {};
+        const incomeTransactions = JSON.parse(localStorage.getItem('incomeTransactions')) || [];
+        const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    
         // Update card balances
         updateCardBalances(budgetData);
-
+    
         // Update income/expense reports
         updateReports(incomeTransactions, expenses);
-
+    
         // Update recent transactions
         updateRecentTransactions(incomeTransactions, expenses);
-
+    
         // Update recent payments (expenses)
         updateRecentPayments(expenses);
-
+    
         // Display username
         displayUsername();
-
+    
         // Set a small delay before creating/updating the pie chart
         // This helps ensure the container is ready
         setTimeout(() => {
             createPieChart(expenses);
         }, 100);
     }
-
+    
     function updateCardBalances(budgetData) {
         // Cash Card
         const cashCard = document.querySelector('.cards-container .card:nth-child(1) .middle h1');
         if (cashCard) cashCard.textContent = `₱${(budgetData.cashBalance || 0).toFixed(2)}`;
-
+    
         // Debit Card
         const debitCard = document.querySelector('.cards-container .card:nth-child(2) .middle h1');
         if (debitCard) debitCard.textContent = `₱${(budgetData.debitBalance || 0).toFixed(2)}`;
-
+    
         // GCash Card
         const gcashCard = document.querySelector('.cards-container .card:nth-child(3) .middle h1');
         if (gcashCard) gcashCard.textContent = `₱${(budgetData.gcashBalance || 0).toFixed(2)}`;
     }
-
+    
     function updateReports(incomeTransactions, expenses) {
         // Calculate total income
         const totalIncome = incomeTransactions.reduce((total, transaction) => {
             return total + parseFloat(transaction.amount);
         }, 0);
-
+    
         // Calculate total expenses
         const totalExpenses = expenses.reduce((total, expense) => {
             return total + parseFloat(expense.amount);
         }, 0);
-
+    
         // Update income report
         const incomeReport = document.querySelector('.monthly-report .report:nth-child(1) details h1');
         if (incomeReport) incomeReport.textContent = `₱${totalIncome.toFixed(2)}`;
-
+    
         // Update expense report
         const expenseReport = document.querySelector('.monthly-report .report:nth-child(2) details h1');
         if (expenseReport) expenseReport.textContent = `₱${totalExpenses.toFixed(2)}`;
     }
-
+    
     function updateRecentTransactions(incomeTransactions, expenses) {
         const historyContainer = document.querySelector('.history-container');
         if (!historyContainer) return;
-
+    
         // Clear all transaction entries
         historyContainer.innerHTML = '';
-
+    
         // Combine and sort transactions (newest first)
         const allTransactions = [
             ...incomeTransactions.map(t => ({ ...t, type: 'income' })),
             ...expenses.map(e => ({ ...e, type: 'expense' }))
         ].sort((a, b) => new Date(b.date + ' ' + b.time) - new Date(a.date + ' ' + a.time));
-
+    
         // Display up to 5 recent transactions
         allTransactions.slice(0, 5).forEach(transaction => {
             const transactionEl = document.createElement('div');
             transactionEl.className = 'history';
-
+    
             transactionEl.innerHTML = `
                 <h4>${transaction.type === 'income' ? 'Income: ' + transaction.source : 'Expense: ' + transaction.category}</h4>
                 <div class="date-time">
@@ -164,81 +203,81 @@ document.addEventListener('DOMContentLoaded', function() {
                     </p>
                 </div>
             `;
-
+    
             historyContainer.appendChild(transactionEl);
         });
     }
-
-function updateRecentPayments(expenses) {
-    const badgeContainer = document.querySelector('.badge-container');
-    if (!badgeContainer) return;
-
-    // Keep only the add button if it exists
-    const addButton = badgeContainer.querySelector('.badge:first-child');
-    badgeContainer.innerHTML = '';
-    if (addButton) badgeContainer.appendChild(addButton);
-
-    // Display up to 7 recent expenses
-    expenses.slice(0, 7).forEach(expense => {
-        const badge = document.createElement('div');
-        badge.className = 'badge';
-
-        // Get category color from our mapping
-        const categoryColor = getCategoryColor(expense.category);
-
-        badge.innerHTML = `
-            <span style="background-color: ${categoryColor}"></span>
-            <div>
-                <h5>${expense.category}</h5>
-                <h4>₱${parseFloat(expense.amount).toFixed(2)}</h4>
-            </div>
-        `;
-
-        // Add hover effect with the category color
-        badge.style.setProperty('--category-color', categoryColor);
-        badge.addEventListener('mouseenter', () => {
-            badge.style.boxShadow = `0 6px 12px ${hexToRgba(categoryColor, 0.2)}`;
+    
+    function updateRecentPayments(expenses) {
+        const badgeContainer = document.querySelector('.badge-container');
+        if (!badgeContainer) return;
+    
+        // Keep only the add button if it exists
+        const addButton = badgeContainer.querySelector('.badge:first-child');
+        badgeContainer.innerHTML = '';
+        if (addButton) badgeContainer.appendChild(addButton);
+    
+        // Display up to 7 recent expenses
+        expenses.slice(0, 7).forEach(expense => {
+            const badge = document.createElement('div');
+            badge.className = 'badge';
+    
+            // Get category color from our mapping
+            const categoryColor = getCategoryColor(expense.category);
+    
+            badge.innerHTML = `
+                <span style="background-color: ${categoryColor}"></span>
+                <div>
+                    <h5>${expense.category}</h5>
+                    <h4>₱${parseFloat(expense.amount).toFixed(2)}</h4>
+                </div>
+            `;
+    
+            // Add hover effect with the category color
+            badge.style.setProperty('--category-color', categoryColor);
+            badge.addEventListener('mouseenter', () => {
+                badge.style.boxShadow = `0 6px 12px ${hexToRgba(categoryColor, 0.2)}`;
+            });
+            badge.addEventListener('mouseleave', () => {
+                badge.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+            });
+    
+            badgeContainer.appendChild(badge);
         });
-        badge.addEventListener('mouseleave', () => {
-            badge.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
-        });
-
-        badgeContainer.appendChild(badge);
-    });
-}
-
-// Helper function to convert hex to rgba
-function hexToRgba(hex, alpha) {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
-
+    }
+    
+    // Helper function to convert hex to rgba
+    function hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+    
     // Create a consistent color mapping for categories
     const categoryColorMap = {
-      'Food': '#FF6384', // Pink
-      'Housing': '#36A2EB', // Blue
-      'Transportation': '#FFCE56', // Yellow
-      'Entertainment': '#4BC0C0', // Teal
-      'Shopping': '#9966FF', // Purple
-      'Health': '#FF9F40', // Orange
-      'Education': '#8AC24A', // Green
-      'Bills': '#FF6B6B', // Light Red
-      'Travel': '#8175C7', // Indigo
-      'Groceries': '#5AD3D1', // Light Teal
-      'Dining': '#FF8A5B', // Coral
-      'Utilities': '#4A5FC4', // Royal Blue
-      'Clothing': '#FF5252', // Red
-      'Tech': '#00B8D4', // Cyan
-      'Other': '#757575'  // Gray
+        'Food': '#FF6384', // Pink
+        'Housing': '#36A2EB', // Blue
+        'Transportation': '#FFCE56', // Yellow
+        'Entertainment': '#4BC0C0', // Teal
+        'Shopping': '#9966FF', // Purple
+        'Health': '#FF9F40', // Orange
+        'Education': '#8AC24A', // Green
+        'Bills': '#FF6B6B', // Light Red
+        'Travel': '#8175C7', // Indigo
+        'Groceries': '#5AD3D1', // Light Teal
+        'Dining': '#FF8A5B', // Coral
+        'Utilities': '#4A5FC4', // Royal Blue
+        'Clothing': '#FF5252', // Red
+        'Tech': '#00B8D4', // Cyan
+        'Other': '#757575' // Gray
     };
-
+    
     function getCategoryColor(category) {
-      // Return the mapped color or a default gray if category isn't in the map
-      return categoryColorMap[category] || '#757575';
+        // Return the mapped color or a default gray if category isn't in the map
+        return categoryColorMap[category] || '#757575';
     }
-
+    
     // Function to create the pie chart
     function createPieChart(expenses) {
         // Check if Chart.js is loaded
@@ -246,13 +285,13 @@ function hexToRgba(hex, alpha) {
             console.log('Chart.js not available yet');
             return;
         }
-
+    
         // Check if canvas exists
         if (!pieChartCanvas) {
             console.log('Pie chart canvas not found');
             return;
         }
-
+    
         // Skip rendering if no expenses yet
         if (!expenses || expenses.length === 0) {
             console.log('No expenses to display in pie chart');
@@ -262,9 +301,9 @@ function hexToRgba(hex, alpha) {
             }
             return;
         }
-
+    
         console.log('Creating pie chart with', expenses.length, 'expenses');
-
+    
         // Group expenses by category
         const categoryTotals = {};
         expenses.forEach(expense => {
@@ -273,24 +312,24 @@ function hexToRgba(hex, alpha) {
             }
             categoryTotals[expense.category] += parseFloat(expense.amount);
         });
-
+    
         // Prepare chart data
         const categories = Object.keys(categoryTotals);
         const amounts = Object.values(categoryTotals);
         const colors = categories.map(category => getCategoryColor(category));
-
+    
         // Destroy existing chart if present
         if (window.dashboardPieChart) {
             window.dashboardPieChart.destroy();
             window.dashboardPieChart = null;
         }
-
+    
         // Set larger dimensions for the chart
         pieChartCanvas.style.height = '400px'; // Increased from 200px
-        pieChartCanvas.style.width = '450px';  // Increased from 250px
+        pieChartCanvas.style.width = '450px'; // Increased from 250px
         pieChartCanvas.height = 300;
         pieChartCanvas.width = 350;
-
+    
         // Create the chart with a larger size
         try {
             window.dashboardPieChart = new Chart(pieChartCanvas, {
@@ -336,70 +375,70 @@ function hexToRgba(hex, alpha) {
             console.error('Error creating pie chart:', error);
         }
     }
-
+    
     // ========== LEVEL SYSTEM FUNCTIONS ==========
-
+    
     function updateLevel() {
-        let currentLevel = parseInt(sessionStorage.getItem('currentLevel')) || 1;
-        let currentExp = parseInt(sessionStorage.getItem('currentExp')) || 0;
-
+        let currentLevel = parseInt(localStorage.getItem('currentLevel')) || 1;
+        let currentExp = parseInt(localStorage.getItem('currentExp')) || 0;
+    
         // Each transaction gives 1 EXP
         currentExp += 1;
-
+    
         // Level up if EXP reaches 100
         if (currentExp >= 100) {
             currentLevel += 1;
             currentExp = 0; // Reset EXP for next level
             showLevelUpNotification(currentLevel);
         }
-
-        // Save to sessionStorage
-        sessionStorage.setItem('currentLevel', currentLevel.toString());
-        sessionStorage.setItem('currentExp', currentExp.toString());
-
+    
+        // Save to localStorage
+        localStorage.setItem('currentLevel', currentLevel.toString());
+        localStorage.setItem('currentExp', currentExp.toString());
+    
         // Update display
         updateLevelDisplay();
     }
-
+    
     function decreaseLevel() {
-        let currentLevel = parseInt(sessionStorage.getItem('currentLevel')) || 1;
-        let currentExp = parseInt(sessionStorage.getItem('currentExp')) || 0;
-
+        let currentLevel = parseInt(localStorage.getItem('currentLevel')) || 1;
+        let currentExp = parseInt(localStorage.getItem('currentExp')) || 0;
+    
         // Decrease EXP by 1 when transaction is deleted
         currentExp = Math.max(0, currentExp - 1);
-
+    
         // Handle level down if EXP goes negative
         if (currentExp < 0 && currentLevel > 1) {
             currentLevel -= 1;
             currentExp = 99; // Set to 99 EXP of previous level
         }
-
-        // Save to sessionStorage
-        sessionStorage.setItem('currentLevel', currentLevel.toString());
-        sessionStorage.setItem('currentExp', currentExp.toString());
-
+    
+        // Save to localStorage
+        localStorage.setItem('currentLevel', currentLevel.toString());
+        localStorage.setItem('currentExp', currentExp.toString());
+    
         // Update display
         updateLevelDisplay();
     }
-
+    
     function updateLevelDisplay() {
-        const currentLevel = parseInt(sessionStorage.getItem('currentLevel')) || 1;
-        const currentExp = parseInt(sessionStorage.getItem('currentExp')) || 0;
+        const currentLevel = parseInt(localStorage.getItem('currentLevel')) || 1;
+        const currentExp = parseInt(localStorage.getItem('currentExp')) || 0;
         const levelHeader = document.querySelector('.level-header h2');
         const expFill = document.getElementById('expFill');
         const expText = document.getElementById('expText');
-
+    
         if (levelHeader) {
             levelHeader.textContent = `Level ${currentLevel}`;
         }
-
+    
         if (expFill && expText) {
             const percentage = (currentExp / 100) * 100;
             expFill.style.width = `${percentage}%`;
             expText.textContent = `${currentExp} / 100 EXP`;
         }
     }
-
+    
     function showLevelUpNotification(newLevel) {
         const notification = document.createElement('div');
         notification.className = 'level-up-notification';
@@ -415,7 +454,7 @@ function hexToRgba(hex, alpha) {
             setTimeout(() => notification.remove(), 500);
         }, 3000);
     }
-
+    
     function initializeTheme() {
         // Changed from sessionStorage to localStorage
         if (localStorage.getItem('darkTheme') === 'true') {
@@ -426,11 +465,11 @@ function hexToRgba(hex, alpha) {
             }
         }
     }
-
+    
     function setupStorageListener() {
         // Keep track of last update time
         let lastUpdateTime = Date.now();
-
+    
         // Update when the page becomes visible
         document.addEventListener('visibilitychange', function() {
             if (document.visibilityState === 'visible') {
@@ -442,7 +481,7 @@ function hexToRgba(hex, alpha) {
                 }
             }
         });
-
+    
         // Listen for storage events (across tabs)
         window.addEventListener('storage', function(event) {
             if (event.key === 'incomeTransactions' ||
@@ -453,14 +492,14 @@ function hexToRgba(hex, alpha) {
                 lastUpdateTime = Date.now();
             }
         });
-
+    
         // Also add a manual trigger for custom events
         window.addEventListener('budgetUpdated', function() {
             updateDashboardData();
             updateLevelDisplay();
             lastUpdateTime = Date.now();
         });
-
+    
         // Less frequent polling as fallback
         setInterval(function() {
             if (document.visibilityState === 'visible' && Date.now() - lastUpdateTime > 5000) {
@@ -470,21 +509,173 @@ function hexToRgba(hex, alpha) {
             }
         }, 5000);
     }
-
+    
     // Handle window resize to redraw chart properly
     window.addEventListener('resize', debounce(function() {
         // Completely redraw the chart on resize rather than just resizing it
         updateDashboardData();
     }, 250));
+    
+    // Global function to get selected date for other pages
+    window.getSelectedDateFromDashboard = function() {
+        const storedDate = localStorage.getItem('selectedDate');
+        if (storedDate) {
+            return new Date(storedDate);
+        }
+        return new Date();
+    };
+    
+    // Global function to format date for display (used by other pages)
+    window.formatDateForTransaction = function(date) {
+        return date.toLocaleDateString();
+    };
+    });
+    
+    function displayUsername() {
+        // Get the username from localStorage
+        const username = localStorage.getItem('username') || 'User';
+    
+        // Update all card holder names
+        const cardHolders = document.querySelectorAll('.cards-container .card .bottom h5');
+        cardHolders.forEach(holder => {
+            holder.textContent = username;
+        });
+    }
+
+    // ==================== AUTHENTICATION PROTECTION ====================
+// Add this script to all protected pages (dashboard.html, profile.html, etc.)
+
+// Check authentication on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Skip authentication check for login and signup pages
+    const currentPage = window.location.pathname;
+    const publicPages = ['index.html', 'signup.html', '/'];
+    
+    // Check if current page is public
+    const isPublicPage = publicPages.some(page => 
+        currentPage.endsWith(page) || currentPage === '/'
+    );
+    
+    if (!isPublicPage) {
+        checkAuthentication();
+    }
 });
 
-function displayUsername() {
-    // Get the username from sessionStorage
-    const username = sessionStorage.getItem('username') || 'User';
-
-    // Update all card holder names
-    const cardHolders = document.querySelectorAll('.cards-container .card .bottom h5');
-    cardHolders.forEach(holder => {
-        holder.textContent = username;
-    });
+function checkAuthentication() {
+    const username = sessionStorage.getItem('username');
+    
+    if (!username) {
+        // No username in session, redirect to login
+        window.location.href = 'index.html';
+        return false;
+    }
+    
+    // Check if user account still exists
+    const accounts = JSON.parse(localStorage.getItem('userAccounts')) || {};
+    if (!accounts[username]) {
+        // User account was deleted, clear session and redirect
+        sessionStorage.clear();
+        window.location.href = 'index.html';
+        return false;
+    }
+    
+    return true;
 }
+
+// ==================== USER DATA SYNCHRONIZATION ====================
+
+// Function to ensure user data is properly loaded
+function ensureUserDataLoaded() {
+    const username = sessionStorage.getItem('username');
+    if (!username) return false;
+    
+    const accounts = JSON.parse(localStorage.getItem('userAccounts')) || {};
+    const userData = accounts[username];
+    
+    if (!userData) return false;
+    
+    // Check if localStorage has the user's data, if not, load it
+    const currentUsername = localStorage.getItem('username');
+    if (currentUsername !== username) {
+        loadUserDataToStorage(userData);
+    }
+    
+    return true;
+}
+
+function loadUserDataToStorage(userData) {
+    // Load all user-specific data to localStorage
+    const keysToLoad = [
+        'budgetData', 'incomeTransactions', 'expenses', 
+        'currentLevel', 'currentExp', 'selectedDate', 'darkTheme'
+    ];
+    
+    keysToLoad.forEach(key => {
+        if (userData[key] !== undefined) {
+            localStorage.setItem(key, typeof userData[key] === 'object' ? 
+                JSON.stringify(userData[key]) : userData[key].toString());
+        }
+    });
+    
+    // Set username in localStorage
+    localStorage.setItem('username', userData.username);
+}
+
+// ==================== PAGE VISIBILITY HANDLER ====================
+
+// Auto-save and sync data when user switches tabs or minimizes window
+document.addEventListener('visibilitychange', function() {
+    const username = sessionStorage.getItem('username');
+    if (!username) return;
+    
+    if (document.visibilityState === 'hidden') {
+        // Save current data when page becomes hidden
+        saveCurrentDataToUser(username);
+    } else {
+        // Ensure data is synchronized when page becomes visible
+        ensureUserDataLoaded();
+    }
+});
+
+// ==================== NAVIGATION PROTECTION ====================
+
+// Save data before page unload
+window.addEventListener('beforeunload', function() {
+    const username = sessionStorage.getItem('username');
+    if (username) {
+        saveCurrentDataToUser(username);
+    }
+});
+
+// ==================== UTILITY FUNCTIONS ====================
+
+function saveCurrentDataToUser(username) {
+    const accounts = JSON.parse(localStorage.getItem('userAccounts')) || {};
+    const userData = accounts[username];
+    
+    if (!userData) return;
+    
+    // Update user data with current localStorage values
+    userData.budgetData = JSON.parse(localStorage.getItem('budgetData') || '{}');
+    userData.incomeTransactions = JSON.parse(localStorage.getItem('incomeTransactions') || '[]');
+    userData.expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+    userData.currentLevel = parseInt(localStorage.getItem('currentLevel') || '1');
+    userData.currentExp = parseInt(localStorage.getItem('currentExp') || '0');
+    userData.selectedDate = localStorage.getItem('selectedDate') || new Date().toISOString().split('T')[0];
+    userData.darkTheme = localStorage.getItem('darkTheme') === 'true';
+    
+    // Save bio if on profile page
+    const bioInput = document.getElementById('bio');
+    if (bioInput) {
+        userData.bio = bioInput.value;
+    }
+    
+    // Save updated data
+    accounts[username] = userData;
+    localStorage.setItem('userAccounts', JSON.stringify(accounts));
+}
+
+// Make functions globally available
+window.checkAuthentication = checkAuthentication;
+window.ensureUserDataLoaded = ensureUserDataLoaded;
+window.saveCurrentDataToUser = saveCurrentDataToUser;

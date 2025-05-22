@@ -21,7 +21,7 @@ themeBtn.onclick = function () {
     document.body.classList.toggle('dark-theme');
     themeBtn.querySelector('span:first-child').classList.toggle('active');
     themeBtn.querySelector('span:last-child').classList.toggle('active');
-    // Store theme preference in localStorage instead of sessionStorage
+    // Store theme preference in localStorage
     localStorage.setItem('darkTheme', document.body.classList.contains('dark-theme'));
 }
 
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let debitBalance = 0;
     let gcashBalance = 0;
 
-    // Load data from sessionStorage
+    // Load data from localStorage
     loadData();
 
     // Update displays
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
         }
 
-        // Save to sessionStorage
+        // Save to localStorage
         saveData();
 
         // Update displays
@@ -128,13 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedAccount = null;
     });
 
-    // Load data from sessionStorage
+    // Load data from localStorage
     function loadData() {
-        const budgetData = JSON.parse(sessionStorage.getItem('budgetData')) || {};
+        const budgetData = JSON.parse(localStorage.getItem('budgetData')) || {};
 
         // Use stored totalIncome if it exists, otherwise calculate from transactions
         totalIncome = budgetData.totalIncome !== undefined ? budgetData.totalIncome :
-            (JSON.parse(sessionStorage.getItem('incomeTransactions')) || [])
+            (JSON.parse(localStorage.getItem('incomeTransactions')) || [])
             .reduce((total, transaction) => total + parseFloat(transaction.amount), 0);
 
         cashBalance = budgetData.cashBalance || 0;
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
         gcashBalance = budgetData.gcashBalance || 0;
     }
 
-    // Save data to sessionStorage
+    // Save data to localStorage
     function saveData() {
         const budgetData = {
             cashBalance,
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
             gcashBalance,
             totalIncome
         };
-        sessionStorage.setItem('budgetData', JSON.stringify(budgetData));
+        localStorage.setItem('budgetData', JSON.stringify(budgetData));
 
         // Trigger storage event manually
         window.dispatchEvent(new Event('storage'));
@@ -228,35 +228,35 @@ document.addEventListener('DOMContentLoaded', function() {
         if (cardType === 'gcash' && amount > gcashBalance) {
             alert('Insufficient funds in GCash account');
             return;
+        }
+
+        // Update balances
+        switch(cardType) {
+            case 'cash':
+                cashBalance -= amount;
+                break;
+            case 'debit':
+                debitBalance -= amount;
+                break;
+            case 'gcash':
+                gcashBalance -= amount;
+                break;
+        }
+
+        // DON'T return amount to total income
+        // totalIncome += amount; // REMOVE THIS LINE
+
+        // Save and update
+        saveData();
+        updateDisplays();
+
+        // Decrease level when transaction is deleted
+        decreaseLevel();
     }
-
-    // Update balances
-    switch(cardType) {
-        case 'cash':
-            cashBalance -= amount;
-            break;
-        case 'debit':
-            debitBalance -= amount;
-            break;
-        case 'gcash':
-            gcashBalance -= amount;
-            break;
-    }
-
-    // DON'T return amount to total income
-    // totalIncome += amount; // REMOVE THIS LINE
-
-    // Save and update
-    saveData();
-    updateDisplays();
-
-    // Decrease level when transaction is deleted
-    decreaseLevel();
-}
 
     function updateLevel() {
-        let currentLevel = parseInt(sessionStorage.getItem('currentLevel')) || 1;
-        let currentExp = parseInt(sessionStorage.getItem('currentExp')) || 0;
+        let currentLevel = parseInt(localStorage.getItem('currentLevel')) || 1;
+        let currentExp = parseInt(localStorage.getItem('currentExp')) || 0;
 
         // Each transaction gives 1 EXP
         currentExp += 1;
@@ -267,17 +267,17 @@ document.addEventListener('DOMContentLoaded', function() {
             currentExp = 0;
         }
 
-        // Save to sessionStorage
-        sessionStorage.setItem('currentLevel', currentLevel.toString());
-        sessionStorage.setItem('currentExp', currentExp.toString());
+        // Save to localStorage
+        localStorage.setItem('currentLevel', currentLevel.toString());
+        localStorage.setItem('currentExp', currentExp.toString());
 
         // Update display
         updateLevelDisplay();
     }
 
     function decreaseLevel() {
-        let currentLevel = parseInt(sessionStorage.getItem('currentLevel')) || 1;
-        let currentExp = parseInt(sessionStorage.getItem('currentExp')) || 0;
+        let currentLevel = parseInt(localStorage.getItem('currentLevel')) || 1;
+        let currentExp = parseInt(localStorage.getItem('currentExp')) || 0;
 
         // Decrease EXP by 1 when transaction is deleted
         currentExp = Math.max(0, currentExp - 1);
@@ -288,17 +288,17 @@ document.addEventListener('DOMContentLoaded', function() {
             currentExp = 99;
         }
 
-        // Save to sessionStorage
-        sessionStorage.setItem('currentLevel', currentLevel.toString());
-        sessionStorage.setItem('currentExp', currentExp.toString());
+        // Save to localStorage
+        localStorage.setItem('currentLevel', currentLevel.toString());
+        localStorage.setItem('currentExp', currentExp.toString());
 
         // Update display
         updateLevelDisplay();
     }
 
     function updateLevelDisplay() {
-        const currentLevel = parseInt(sessionStorage.getItem('currentLevel')) || 1;
-        const currentExp = parseInt(sessionStorage.getItem('currentExp')) || 0;
+        const currentLevel = parseInt(localStorage.getItem('currentLevel')) || 1;
+        const currentExp = parseInt(localStorage.getItem('currentExp')) || 0;
         const levelHeader = document.querySelector('.level-header h2');
         const expFill = document.getElementById('expFill');
         const expText = document.getElementById('expText');
@@ -319,3 +319,141 @@ document.addEventListener('DOMContentLoaded', function() {
         this.value = this.value.replace(/[^0-9.]/g, '');
     });
 });
+
+// ==================== AUTHENTICATION PROTECTION ====================
+// Add this script to all protected pages (dashboard.html, profile.html, etc.)
+
+// Check authentication on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Skip authentication check for login and signup pages
+    const currentPage = window.location.pathname;
+    const publicPages = ['index.html', 'signup.html', '/'];
+    
+    // Check if current page is public
+    const isPublicPage = publicPages.some(page => 
+        currentPage.endsWith(page) || currentPage === '/'
+    );
+    
+    if (!isPublicPage) {
+        checkAuthentication();
+    }
+});
+
+function checkAuthentication() {
+    const username = sessionStorage.getItem('username');
+    
+    if (!username) {
+        // No username in session, redirect to login
+        window.location.href = 'index.html';
+        return false;
+    }
+    
+    // Check if user account still exists
+    const accounts = JSON.parse(localStorage.getItem('userAccounts')) || {};
+    if (!accounts[username]) {
+        // User account was deleted, clear session and redirect
+        sessionStorage.clear();
+        window.location.href = 'index.html';
+        return false;
+    }
+    
+    return true;
+}
+
+// ==================== USER DATA SYNCHRONIZATION ====================
+
+// Function to ensure user data is properly loaded
+function ensureUserDataLoaded() {
+    const username = sessionStorage.getItem('username');
+    if (!username) return false;
+    
+    const accounts = JSON.parse(localStorage.getItem('userAccounts')) || {};
+    const userData = accounts[username];
+    
+    if (!userData) return false;
+    
+    // Check if localStorage has the user's data, if not, load it
+    const currentUsername = localStorage.getItem('username');
+    if (currentUsername !== username) {
+        loadUserDataToStorage(userData);
+    }
+    
+    return true;
+}
+
+function loadUserDataToStorage(userData) {
+    // Load all user-specific data to localStorage
+    const keysToLoad = [
+        'budgetData', 'incomeTransactions', 'expenses', 
+        'currentLevel', 'currentExp', 'selectedDate', 'darkTheme'
+    ];
+    
+    keysToLoad.forEach(key => {
+        if (userData[key] !== undefined) {
+            localStorage.setItem(key, typeof userData[key] === 'object' ? 
+                JSON.stringify(userData[key]) : userData[key].toString());
+        }
+    });
+    
+    // Set username in localStorage
+    localStorage.setItem('username', userData.username);
+}
+
+// ==================== PAGE VISIBILITY HANDLER ====================
+
+// Auto-save and sync data when user switches tabs or minimizes window
+document.addEventListener('visibilitychange', function() {
+    const username = sessionStorage.getItem('username');
+    if (!username) return;
+    
+    if (document.visibilityState === 'hidden') {
+        // Save current data when page becomes hidden
+        saveCurrentDataToUser(username);
+    } else {
+        // Ensure data is synchronized when page becomes visible
+        ensureUserDataLoaded();
+    }
+});
+
+// ==================== NAVIGATION PROTECTION ====================
+
+// Save data before page unload
+window.addEventListener('beforeunload', function() {
+    const username = sessionStorage.getItem('username');
+    if (username) {
+        saveCurrentDataToUser(username);
+    }
+});
+
+// ==================== UTILITY FUNCTIONS ====================
+
+function saveCurrentDataToUser(username) {
+    const accounts = JSON.parse(localStorage.getItem('userAccounts')) || {};
+    const userData = accounts[username];
+    
+    if (!userData) return;
+    
+    // Update user data with current localStorage values
+    userData.budgetData = JSON.parse(localStorage.getItem('budgetData') || '{}');
+    userData.incomeTransactions = JSON.parse(localStorage.getItem('incomeTransactions') || '[]');
+    userData.expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+    userData.currentLevel = parseInt(localStorage.getItem('currentLevel') || '1');
+    userData.currentExp = parseInt(localStorage.getItem('currentExp') || '0');
+    userData.selectedDate = localStorage.getItem('selectedDate') || new Date().toISOString().split('T')[0];
+    userData.darkTheme = localStorage.getItem('darkTheme') === 'true';
+    
+    // Save bio if on profile page
+    const bioInput = document.getElementById('bio');
+    if (bioInput) {
+        userData.bio = bioInput.value;
+    }
+    
+    // Save updated data
+    accounts[username] = userData;
+    localStorage.setItem('userAccounts', JSON.stringify(accounts));
+}
+
+// Make functions globally available
+window.checkAuthentication = checkAuthentication;
+window.ensureUserDataLoaded = ensureUserDataLoaded;
+window.saveCurrentDataToUser = saveCurrentDataToUser;

@@ -213,6 +213,11 @@ main {
     margin: 1rem auto 4rem;
     padding-top: 2.5rem;
 }
+
+main aside {
+    border-right: black 1px solid;
+}
+
 main aside .sidebar h4 {
     font-size: 0.9rem;
 }
@@ -246,7 +251,7 @@ main aside .sidebar a.profile-btn {
     width: 8rem;
     height: 8rem;
     border-radius: 50%;
-    background-image: url('img/profile.png');
+    background-image: url('img/defaultProfile.jpg');
     background-size: cover;
     background-position: center;
     border: var(--color-dark) 3px solid;
@@ -289,19 +294,6 @@ main aside .sidebar a:hover span {
     margin-left: 2rem;
 }
 
-main aside .sidebar a.profile-btn {
-    display: inline-block;
-    margin-top: 40rem;
-    margin-left: 3rem;
-    width: 8rem;
-    height: 8rem;
-    border-radius: 50%;
-    background-image: url('img/profile.png');
-    background-size: cover;
-    background-position: center;
-    border: var(--color-dark) 3px solid;
-    transition: all 300ms ease-in-out;
-}
 
 main aside .sidebar a.profile-btn:hover {
     box-shadow: 0 2rem 3rem var(--color-primary-light);
